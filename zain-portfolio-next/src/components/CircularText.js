@@ -2,53 +2,34 @@ import React from 'react';
 
 const CircularText = () => {
   return (
-    <div className="relative w-28 h-28 flex items-center justify-center">
+    <div className="relative w-48 h-48 flex items-center justify-center group">
       {/* SVG for rotating text */}
-      <svg viewBox="0 0 100 100" className="w-full h-full animate-spin-slow">
-        {/* Circular Text */}
-        <circle cx="50" cy="50" r="49" fill="none" />
-        
-        {/* Individual letters positioned around the circle */}
-        <text className="text-[4px] font-medium uppercase fill-dark dark:fill-light tracking-[1px]" textAnchor="middle">
-          {/* M */}
-          <textPath href="#textCircle" startOffset="0%">M</textPath>
-          {/* U */}
-          <textPath href="#textCircle" startOffset="8%">U</textPath>
-          {/* H */}
-          <textPath href="#textCircle" startOffset="16%">H</textPath>
-          {/* A */}
-          <textPath href="#textCircle" startOffset="24%">A</textPath>
-          {/* M */}
-          <textPath href="#textCircle" startOffset="32%">M</textPath>
-          {/* M */}
-          <textPath href="#textCircle" startOffset="40%">M</textPath>
-          {/* A */}
-          <textPath href="#textCircle" startOffset="48%">A</textPath>
-          {/* D */}
-          <textPath href="#textCircle" startOffset="56%">D</textPath>
-          {/* Space and dash */}
-          <textPath href="#textCircle" startOffset="64%">—</textPath>
-          {/* Z */}
-          <textPath href="#textCircle" startOffset="72%">Z</textPath>
-          {/* A */}
-          <textPath href="#textCircle" startOffset="80%">A</textPath>
-          {/* I */}
-          <textPath href="#textCircle" startOffset="88%">I</textPath>
-          {/* N */}
-          <textPath href="#textCircle" startOffset="96%">N</textPath>
+      <svg 
+        viewBox="0 0 100 100" 
+        className="w-full h-full animate-spin-slow absolute"
+      >
+        <defs>
+          <path
+            id="textCircle"
+            d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
+            fill="none"
+          />
+        </defs>
+        <text className="fill-dark dark:fill-light text-[6.2px] tracking-[0.5px] uppercase font-bold">
+          <textPath
+            href="#textCircle"
+            textLength="220"
+            lengthAdjust="spacingAndGlyphs"
+          >
+           • Muhammad Zain • Software Engineering • University of Calgary   
+          </textPath>
         </text>
-
-        {/* Define the circle path for text */}
-        <path
-          id="textCircle"
-          d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
-          fill="none"
-        />
       </svg>
       
       {/* Center circle with "Contact" text */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-dark dark:bg-light rounded-full flex items-center justify-center">
-        <span className="text-light dark:text-dark text-sm font-medium">Contact</span>
+      <div className="w-[4.5rem] h-[4.5rem] bg-dark dark:bg-light rounded-full flex items-center justify-center shadow-lg transition-all duration-300 group-hover:scale-[0.97] group-hover:shadow-sm">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primaryDark/20 dark:from-primaryDark/20 dark:to-primary/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <span className="text-light dark:text-dark text-base font-medium relative z-10">Contact</span>
       </div>
     </div>
   );
