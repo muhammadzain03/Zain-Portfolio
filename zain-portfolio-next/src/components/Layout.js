@@ -11,7 +11,7 @@ export default function Layout({ children }) {
         <meta name="description" content="Software Engineer Portfolio for Muhammad Zain" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="bg-gray-50 text-gray-800 font-sans">
+      <div className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light">
         <NavBar />
         <main className="pt-16">{children}</main>
         <Footer />
