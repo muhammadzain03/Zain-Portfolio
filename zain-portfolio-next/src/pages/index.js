@@ -36,13 +36,21 @@ export default function Home() {
             <div className="relative w-full max-w-sm p-2 bg-gradient-to-br from-[#dbeafe] to-[#ede9fe] dark:from-[#1e293b] dark:to-[#0f172a] rounded-3xl shadow-xl overflow-hidden group transition-all duration-300 hover:scale-105">
               <div className="absolute inset-0 bg-light/10 dark:bg-dark/10 backdrop-blur-md rounded-3xl z-0 group-hover:bg-light/15 dark:group-hover:bg-dark/15 transition-colors duration-300"></div>
               <div className="relative z-10 rounded-2xl overflow-hidden border-2 border-dark/10 dark:border-light/10 shadow-inner">
-                <div className="relative">
+                <div className="relative w-full pt-[75%]">
                   <Image
                     src={profilePic}
-                    alt="Muhammad Zain"
-                    className="w-full h-auto object-cover transition-transform duration-500 hover:scale-110"
+                    alt="Muhammad Zain in the Canadian Rockies"
+                    fill
                     priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    quality={100}
+                    sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px"
+                    className="object-cover object-center absolute inset-0 transition-transform duration-500 group-hover:scale-110 will-change-transform"
+                    style={{ 
+                      transform: 'translate3d(0, 0, 0)',
+                      imageRendering: 'crisp-edges',
+                      WebkitFontSmoothing: 'antialiased',
+                      backfaceVisibility: 'hidden'
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
