@@ -1,3 +1,13 @@
+/**
+ * Layout.js
+ * Purpose: Main layout wrapper for consistent page structure
+ * Features:
+ * - Common layout elements (header, footer)
+ * - Navigation integration
+ * - Container sizing and padding
+ * - Consistent styling across pages
+ */
+
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Head from "next/head";

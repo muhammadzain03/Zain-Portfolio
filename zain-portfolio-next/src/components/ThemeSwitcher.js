@@ -1,3 +1,13 @@
+/**
+ * ThemeSwitcher.js
+ * Purpose: Handles the dark/light theme switching functionality
+ * Features:
+ * - Toggle between dark and light themes
+ * - Persists theme preference
+ * - Smooth transition animations
+ * - System theme detection
+ */
+
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { FiSun, FiMoon } from 'react-icons/fi';

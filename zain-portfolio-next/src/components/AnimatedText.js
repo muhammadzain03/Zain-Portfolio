@@ -1,3 +1,13 @@
+/**
+ * AnimatedText.js
+ * Purpose: Reusable animated text component for dynamic text displays
+ * Features:
+ * - Text animation effects
+ * - Customizable text styles
+ * - Responsive design
+ * - Motion effects integration
+ */
+
 import React from 'react';
 
 const AnimatedText = ({ text, className = "" }) => {
