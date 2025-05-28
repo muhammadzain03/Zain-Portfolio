@@ -1,3 +1,13 @@
+/**
+ * CircularText.js
+ * Purpose: Creates circular rotating text animation
+ * Features:
+ * - Text arranged in a circular pattern
+ * - Continuous rotation animation
+ * - Customizable text and styling
+ * - SVG-based implementation
+ */
+
 import React from 'react';
 
 const CircularText = () => {

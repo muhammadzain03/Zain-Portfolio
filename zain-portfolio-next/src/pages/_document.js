@@ -1,3 +1,13 @@
+/**
+ * _document.js
+ * Purpose: Custom Document component for Next.js
+ * Features:
+ * - HTML document structure customization
+ * - Meta tags and SEO optimization
+ * - Font loading optimization
+ * - Initial server-side rendering setup
+ */
+
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
