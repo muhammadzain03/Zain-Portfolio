@@ -32,7 +32,7 @@ export default function NavBar() {
         hover:border-primary/20 dark:hover:border-primaryDark/20">
         
         <ul className="flex space-x-6 text-sm font-medium">
-          {["home", "about", "projects", "resume", "leetcode"].map((item) => (
+          {["home", "about", "projects"].map((item) => (
             <li key={item}>
               <Link
                 href={`#${item}`}
@@ -43,6 +43,26 @@ export default function NavBar() {
               </Link>
             </li>
           ))}
+          <li>
+            <a
+              href="/Muhammad-Zain-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-300 hover:scale-105 group"
+            >
+              Resume
+              <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </li>
+          <li>
+            <Link
+              href="#leetcode"
+              className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-300 hover:scale-105 group"
+            >
+              Leetcode
+              <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+          </li>
         </ul>
 
         <div className="flex space-x-4 items-center">
