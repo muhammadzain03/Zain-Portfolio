@@ -32,35 +32,67 @@ export default function NavBar() {
         hover:border-primary/20 dark:hover:border-primaryDark/20">
         
         <ul className="flex space-x-6 text-sm font-medium">
-          {["home", "about", "projects"].map((item) => (
-            <li key={item}>
-              <Link
-                href={`#${item}`}
-                className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-300 hover:scale-105 group"
-              >
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            </li>
-          ))}
           <li>
-            <a
-              href="/Muhammad-Zain-Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-300 hover:scale-105 group"
+            <Link
+              href="/"
+              prefetch={true}
+              className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-150 hover:scale-105 group"
             >
-              Resume
-              <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-300 group-hover:w-full"></span>
-            </a>
+              Home
+              <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-150 group-hover:w-full"></span>
+            </Link>
           </li>
           <li>
             <Link
-              href="#leetcode"
-              className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-300 hover:scale-105 group"
+              href="/about"
+              prefetch={true}
+              className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-150 hover:scale-105 group"
+            >
+              About
+              <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-150 group-hover:w-full"></span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/projects"
+              prefetch={true}
+              className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-150 hover:scale-105 group"
+            >
+              Projects
+              <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-150 group-hover:w-full"></span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/resume"
+              prefetch={true}
+              onMouseEnter={() => {
+                // Preload PDF on hover for instant loading (client-side only)
+                if (typeof window !== 'undefined') {
+                  const existingLink = document.querySelector('link[href="/Muhammad-Zain-Resume.pdf"]');
+                  if (!existingLink) {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = '/Muhammad-Zain-Resume.pdf';
+                    link.as = 'document';
+                    document.head.appendChild(link);
+                  }
+                }
+              }}
+              className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-150 hover:scale-105 group"
+            >
+              Resume
+              <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-150 group-hover:w-full"></span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/leetcode"
+              prefetch={true}
+              className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-150 hover:scale-105 group"
             >
               Leetcode
-              <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-gradient-to-r from-primary/70 to-primary dark:from-primaryDark/70 dark:to-primaryDark transition-all duration-150 group-hover:w-full"></span>
             </Link>
           </li>
         </ul>

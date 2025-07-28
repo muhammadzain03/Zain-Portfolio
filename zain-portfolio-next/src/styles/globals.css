@@ -50,3 +50,33 @@ body {
 .nav-link:hover::after {
   width: 100%;
 }
+
+/* Performance optimizations */
+* {
+  will-change: auto;
+}
+
+/* Hardware acceleration for animations */
+.motion-div {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize scroll performance */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .motion-div {
+    transform: none !important;
+  }
+}
