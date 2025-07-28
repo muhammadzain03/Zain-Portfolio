@@ -4,7 +4,7 @@ export default function Footer() {
         <p>
           &copy; {new Date().getFullYear()} Muhammad Zain. All rights reserved.
         </p>
-        <p className="mt-2">Built with Next.js & Tailwind CSS</p>
+        <p className="mt-2">Built with Next.js - Tailwind CSS & Cursor AI</p>
       </footer>
     );
   }
