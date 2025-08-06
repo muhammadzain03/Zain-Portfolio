@@ -102,6 +102,7 @@ export default function NavBar() {
             href="https://github.com/muhammadzain03" 
             target="_blank" 
             rel="noopener noreferrer"
+            aria-label="View GitHub Profile"
             className="group relative p-2 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 hover:scale-110"
           >
             <FiGithub className="h-5 w-5 text-dark/90 dark:text-light/90 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors" />
@@ -110,12 +111,14 @@ export default function NavBar() {
             href="https://www.linkedin.com/in/muhammad-zain03/" 
             target="_blank" 
             rel="noopener noreferrer"
+            aria-label="View LinkedIn Profile"
             className="group relative p-2 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 hover:scale-110"
           >
             <FaLinkedinIn className="h-5 w-5 text-dark/90 dark:text-light/90 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors" />
           </a>
           <a 
             href="mailto:muhammad.zain1@ucalgary.ca"
+            aria-label="Send Email"
             className="group relative p-2 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 hover:scale-110"
           >
             <FiMail className="h-5 w-5 text-dark/90 dark:text-light/90 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors" />
