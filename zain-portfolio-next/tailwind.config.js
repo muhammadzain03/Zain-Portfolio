@@ -35,7 +35,6 @@ module.exports = {
       },
       animation: {
         'spin-slow': 'spin 30s linear infinite',
-        'spin-slow-reverse': 'spin-reverse 30s linear infinite',
         'spin-cw': 'spin-cw 30s linear infinite',
         'gradient': 'gradient 6s ease infinite',
         'fadeIn': 'fadeIn 0.5s ease-in-out',
@@ -47,10 +46,7 @@ module.exports = {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
-        'spin-reverse': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(-360deg)' },
-        },
+
         gradient: {
           '0%, 100%': {
             'background-size': '200% 200%',
