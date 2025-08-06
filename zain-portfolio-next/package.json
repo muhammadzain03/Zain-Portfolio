@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "powershell -command \"if (Test-Path .next) { Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue }; if (Test-Path node_modules\\.cache) { Remove-Item node_modules\\.cache -Recurse -Force -ErrorAction SilentlyContinue }; Write-Host 'Cache cleared'\"",
+    "dev:fast": "powershell -command \"if (Test-Path .next) { Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue }\" && next dev"
   },
   "dependencies": {
     "framer-motion": "^12.15.0",
@@ -14,7 +16,8 @@
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "web-vitals": "^3.5.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

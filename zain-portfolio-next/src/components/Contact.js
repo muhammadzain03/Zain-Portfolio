@@ -1,18 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CircularText from './CircularText';
 import ContactChat from './ContactChat';
 
 const Contact = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
+  // Handle click outside to close modal
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isChatOpen && !event.target.closest('.contact-modal') && !event.target.closest('.contact-button')) {
+        setIsChatOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape' && isChatOpen) {
+        setIsChatOpen(false);
+      }
+    };
+
+    if (isChatOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isChatOpen]);
+
   return (
-    <div className="fixed left-4 bottom-4 flex items-end gap-4">
+    <div className="fixed left-4 bottom-4 flex items-end gap-4 z-50">
       <div 
-        className="w-32 h-32 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 relative group"
+        className="w-32 h-32 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 relative group contact-button"
         onClick={() => setIsChatOpen(true)}
       >
         <div className="absolute -inset-2 bg-dark/5 dark:bg-light/5 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <CircularText />
+        <CircularText onClick={() => setIsChatOpen(true)} />
       </div>
       <ContactChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>

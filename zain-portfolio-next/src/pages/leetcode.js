@@ -122,3 +122,12 @@ export default function Leetcode() {
     </>
   );
 }
+
+// Pre-generate this page at build time for instant loading
+export async function getStaticProps() {
+  return {
+    props: {},
+    // Revalidate every hour in production
+    revalidate: 3600,
+  };
+}

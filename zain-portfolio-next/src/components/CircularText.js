@@ -13,10 +13,19 @@ import React from 'react';
 const CircularText = () => {
   return (
     <div className="relative w-48 h-48 flex items-center justify-center group">
+      <style jsx>{`
+        @keyframes spin-cw {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
       {/* SVG for rotating text */}
       <svg 
         viewBox="0 0 100 100" 
-        className="w-full h-full animate-spin-slow absolute"
+        className="w-full h-full absolute"
+        style={{
+          animation: 'spin-cw 30s linear infinite'
+        }}
       >
         <defs>
           <path
@@ -31,7 +40,7 @@ const CircularText = () => {
             textLength="220"
             lengthAdjust="spacingAndGlyphs"
           >
-           • Muhammad Zain • Software Engineering • University of Calgary   
+            • Muhammad Zain • Software Engineering • University of Calgary   
           </textPath>
         </text>
       </svg>
