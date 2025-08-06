@@ -19,9 +19,9 @@ const WebVitals = () => {
     // Run in both development and production
     const isDev = process.env.NODE_ENV === 'development';
     
-    // Add development mode indicator to console
+    // Development mode indicator (removed console.log for production)
     if (isDev) {
-      console.log('Web Vitals Monitoring (Development Mode)');
+      // Web Vitals monitoring active in development
     }
 
     // Web Vitals measurement and optimization
@@ -31,7 +31,6 @@ const WebVitals = () => {
 
         // Largest Contentful Paint (LCP) - Target: < 2.5s
         getLCP((metric) => {
-          console.log('LCP:', metric);
           // Send to analytics if needed
           if (typeof window !== 'undefined' && window.gtag) {
             window.gtag('event', 'web_vitals', {
@@ -45,7 +44,6 @@ const WebVitals = () => {
 
         // First Input Delay (FID) - Target: < 100ms  
         getFID((metric) => {
-          console.log('FID:', metric);
           if (typeof window !== 'undefined' && window.gtag) {
             window.gtag('event', 'web_vitals', {
               event_category: 'Web Vitals',
@@ -58,7 +56,6 @@ const WebVitals = () => {
 
         // Cumulative Layout Shift (CLS) - Target: < 0.1
         getCLS((metric) => {
-          console.log('CLS:', metric);
           if (typeof window !== 'undefined' && window.gtag) {
             window.gtag('event', 'web_vitals', {
               event_category: 'Web Vitals',
@@ -71,16 +68,16 @@ const WebVitals = () => {
 
         // First Contentful Paint (FCP) - Target: < 1.8s
         getFCP((metric) => {
-          console.log('FCP:', metric);
+          // FCP measurement complete
         });
 
         // Time to First Byte (TTFB) - Target: < 600ms
         getTTFB((metric) => {
-          console.log('TTFB:', metric);
+          // TTFB measurement complete
         });
 
       } catch (error) {
-        console.warn('Web Vitals measurement failed:', error);
+        // Web Vitals measurement failed silently
       }
     };
 

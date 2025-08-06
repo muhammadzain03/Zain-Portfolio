@@ -18,12 +18,10 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx'],
   compress: true,
   crossOrigin: 'anonymous',
-  reactStrictMode: true,
   productionBrowserSourceMaps: false,
   experimental: {
     optimizePackageImports: ['framer-motion', 'react-icons'],
   },
-  compress: true,
   poweredByHeader: false,
   generateEtags: false,
   // Enable faster builds and better caching

@@ -394,12 +394,15 @@ export default function Projects() {
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
             >
               {memoizedProjects.map((project, index) => (
-                <ProjectCard 
-                  key={project.id} 
-                  project={project} 
-                  index={index} 
-                  onCardClick={handleCardClick}
-                />
+                <div key={project.id} className={index === memoizedProjects.length - 1 && memoizedProjects.length % 2 === 1 ? "lg:col-span-2 lg:flex lg:justify-center" : ""}>
+                  <div className={index === memoizedProjects.length - 1 && memoizedProjects.length % 2 === 1 ? "lg:w-full lg:max-w-lg" : ""}>
+                    <ProjectCard 
+                      project={project} 
+                      index={index} 
+                      onCardClick={handleCardClick}
+                    />
+                  </div>
+                </div>
               ))}
             </motion.div>
 
@@ -417,14 +420,14 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br from-light/60 via-light/50 to-light/60 dark:from-dark/60 dark:via-dark/50 dark:to-dark/60 backdrop-blur-sm rounded-2xl border border-primary/20 dark:border-primaryDark/20 shadow-lg hover:shadow-2xl transition-all duration-500"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-light/60 via-light/50 to-light/60 dark:from-dark/60 dark:via-dark/50 dark:to-dark/60 backdrop-blur-sm rounded-xl border border-primary/20 dark:border-primaryDark/20 shadow-lg hover:shadow-2xl transition-all duration-500"
               >
-                <FaGithub className="text-2xl text-primary dark:text-primaryDark" />
+                <FaGithub className="text-lg text-primary dark:text-primaryDark" />
                 <div className="text-left">
-                  <div className="text-lg font-semibold text-dark dark:text-light">
+                  <div className="text-base font-semibold text-dark dark:text-light">
                     View All Projects
                   </div>
-                  <div className="text-sm text-dark/60 dark:text-light/60">
+                  <div className="text-xs text-dark/60 dark:text-light/60">
                     @muhammadzain03
                   </div>
                 </div>
