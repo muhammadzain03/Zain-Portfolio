@@ -46,6 +46,7 @@ const ContactChat = ({ isOpen, onClose }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={onClose}
+              aria-label="Close contact chat"
               className="p-1 hover:bg-light/10 rounded-full transition-colors"
             >
               <FiX className="w-5 h-5 text-light" />
@@ -80,6 +81,7 @@ const ContactChat = ({ isOpen, onClose }) => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => copyToClipboard(email, 'email')}
+                  aria-label="Copy email address"
                   className="p-1.5 hover:bg-dark/10 dark:hover:bg-light/10 rounded-lg transition-colors"
                 >
                   <FiCopy className="w-3.5 h-3.5 text-dark/70 dark:text-light/70" />
@@ -119,6 +121,7 @@ const ContactChat = ({ isOpen, onClose }) => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => copyToClipboard(phone, 'phone')}
+                  aria-label="Copy phone number"
                   className="p-1.5 hover:bg-dark/10 dark:hover:bg-light/10 rounded-lg transition-colors"
                 >
                   <FiCopy className="w-3.5 h-3.5 text-dark/70 dark:text-light/70" />

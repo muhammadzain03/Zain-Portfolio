@@ -91,6 +91,7 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
           {/* Compact Close Button */}
           <button
             onClick={onClose}
+            aria-label="Close project modal"
             className="absolute top-2 right-2 z-20 w-7 h-7 bg-dark/90 dark:bg-light/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-dark dark:hover:bg-light transition-all duration-200 shadow-lg"
           >
             <FaTimes className="text-light dark:text-dark text-xs" />
@@ -121,6 +122,7 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={onVideoToggle}
+                    aria-label="Play video"
                     className="absolute inset-0 flex items-center justify-center bg-black/15 hover:bg-black/10 transition-all duration-300"
                   >
                     <div className="w-12 h-12 bg-primary/95 dark:bg-primaryDark/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300">
@@ -164,6 +166,7 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
             {project.hasVideo && (
               <button
                 onClick={onVideoToggle}
+                aria-label={showVideo ? "Show image" : "Show video"}
                 className="absolute bottom-2 left-2 z-20 px-2 py-1 bg-dark/90 dark:bg-light/90 backdrop-blur-sm rounded-md flex items-center gap-1.5 text-light dark:text-dark text-xs font-medium shadow-lg hover:bg-dark dark:hover:bg-light transition-all duration-200"
               >
                 <FaPlay className="text-xs" />
@@ -297,6 +300,7 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={`View ${project.title} on GitHub`}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: index * 0.2 + 0.7 }}
@@ -418,6 +422,7 @@ export default function Projects() {
                 href="https://github.com/muhammadzain03"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="View all projects on GitHub"
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-light/60 via-light/50 to-light/60 dark:from-dark/60 dark:via-dark/50 dark:to-dark/60 backdrop-blur-sm rounded-xl border border-primary/20 dark:border-primaryDark/20 shadow-lg hover:shadow-2xl transition-all duration-500"
