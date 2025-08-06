@@ -51,21 +51,42 @@ body {
   width: 100%;
 }
 
-/* Performance optimizations */
+/* Enhanced Performance optimizations */
 * {
   will-change: auto;
 }
 
-/* Hardware acceleration for animations */
-.motion-div {
+/* Hardware acceleration for animations and media */
+.motion-div, [class*="motion-"], [class*="animate-"] {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
 }
 
+/* Optimize video and image rendering for better quality and performance */
+video {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  image-rendering: auto;
+}
+
+img {
+  transform: translateZ(0);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
 /* Optimize scroll performance */
-html {
+html, body {
   scroll-behavior: smooth;
+  overscroll-behavior-y: none;
+}
+
+/* Better modal backdrop performance */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: translateZ(0);
 }
 
 /* Reduce motion for users who prefer it */
@@ -79,4 +100,88 @@ html {
   .motion-div {
     transform: none !important;
   }
+}
+
+/* Force circular text animation to work regardless of motion preferences */
+.animate-spin-slow {
+  animation: spin 30s linear infinite !important;
+}
+
+/* Custom clockwise rotation animation for circular text */
+@keyframes spin-cw {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-cw {
+  animation: spin-cw 30s linear infinite !important;
+}
+
+/* Core Web Vitals Optimizations */
+
+/* Font optimization for better LCP */
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  font-weight: 100 900;
+  src: local('Montserrat');
+}
+
+/* Prevent layout shift (CLS) */
+img, video {
+  max-width: 100%;
+  height: auto;
+  /* Preserve aspect ratio to prevent layout shift */
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Critical above-the-fold content optimization */
+.hero-section, .critical-content {
+  contain: layout style paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 1200px 800px;
+}
+
+/* Optimize font rendering for better LCP */
+body {
+  font-display: swap;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improve text rendering performance */
+h1, h2, h3, h4, h5, h6 {
+  text-rendering: optimizeSpeed;
+  contain: layout style;
+}
+
+/* Optimize image loading for LCP */
+.priority-image {
+  content-visibility: auto;
+  contain-intrinsic-size: 500px 600px;
+}
+
+/* Button and interactive elements for better FID */
+button, a, [role="button"] {
+  contain: layout style;
+  will-change: transform;
+  cursor: pointer;
+}
+
+/* Optimize animations for performance */
+@keyframes optimized-fade-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fast-fade-in {
+  animation: optimized-fade-in 0.3s ease-out forwards;
 }

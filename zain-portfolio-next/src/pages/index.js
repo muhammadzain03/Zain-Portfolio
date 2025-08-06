@@ -11,7 +11,9 @@
 
 import Head from 'next/head';
 import Image from 'next/image';
+import OptimizedImage from '@/components/OptimizedImage';
 import Contact from '@/components/Contact';
+import SEO from '@/components/SEO';
 import profilePic from "/public/images/profile/zain.jpg";
 import { motion } from 'framer-motion';
 
@@ -25,15 +27,18 @@ export default function Home() {
 
   return (
     <>
+      <SEO
+        title="Muhammad Zain | Software Engineering Student & Developer"
+        description="Third-year Software Engineering student at University of Calgary. Passionate about full-stack development, machine learning, and building impactful software solutions. Explore my projects and journey."
+        canonical="/"
+        ogType="website"
+      />
+      
       <Head>
-        <title>Muhammad Zain | Home</title>
-        <meta
-          name="description"
-          content="Muhammad Zain – Software Engineering Portfolio"
-        />
+        <meta name="application-name" content="Muhammad Zain Portfolio" />
       </Head>
 
-      <main className="flex flex-col w-full min-h-screen bg-light dark:bg-dark">
+      <main className="flex flex-col w-full min-h-screen bg-light dark:bg-dark hero-section">
         {/* Initials Badge */}
         <div className="w-full flex justify-center mt-4">
           <motion.div
@@ -248,13 +253,17 @@ export default function Home() {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="relative rounded-xl overflow-hidden">
-                      <Image
+                      <OptimizedImage
                         src={profilePic}
-                        alt="Muhammad Zain in the Canadian Rockies"
+                        alt="Muhammad Zain - Software Engineering Student at University of Calgary"
                         width={500}
                         height={600}
-                        priority
-                        className="object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
+                        aspectRatio={500/600}
+                        priority={true}
+                        quality={90}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover object-center transform group-hover:scale-105 transition-transform duration-500 priority-image"
+                        placeholder="blur"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>

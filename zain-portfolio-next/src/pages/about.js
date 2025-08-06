@@ -11,11 +11,18 @@
 
 import Head from 'next/head';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import { useRef } from 'react';
 import { FaChess, FaFutbol } from 'react-icons/fa';
 import { BiMovie } from 'react-icons/bi';
 
-import Contact from '@/components/Contact';
+// Dynamically import heavy components
+const Contact = dynamic(() => import('@/components/Contact'), {
+  ssr: false,
+  loading: () => <div className="h-20" /> // Placeholder height
+});
+
+import SEO from '@/components/SEO';
 
 export default function About() {
   const containerRef = useRef(null);
@@ -29,17 +36,22 @@ export default function About() {
 
   return (
     <>
+      <SEO
+        title="About Muhammad Zain | Software Engineering Journey & Skills"
+        description="Discover Muhammad Zain's journey from Karachi to Calgary as a Software Engineering student. Learn about his expertise in full-stack development, machine learning, database systems, and passion for building meaningful technology."
+        canonical="/about"
+        ogType="profile"
+      />
+      
       <Head>
-        <title>Muhammad Zain | About</title>
-        <meta
-          name="description"
-          content="Learn about Muhammad Zain - Software Engineering student, problem solver, and technology enthusiast"
-        />
+        {/* Page-specific optimizations */}
+        <meta name="robots" content="index,follow" />
+        <meta name="format-detection" content="telephone=no" />
       </Head>
 
-      <main className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light" ref={containerRef}>
+      <main className="relative min-h-screen bg-light dark:bg-dark text-dark dark:text-light" ref={containerRef} role="main">
         {/* Hero Section */}
-        <section className="pt-24 pb-8 px-4 md:px-8 lg:px-16 xl:px-32">
+        <section className="pt-24 pb-8 px-4 md:px-8 lg:px-16 xl:px-32" aria-labelledby="about-heading">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -48,10 +60,14 @@ export default function About() {
               className="text-center mb-8"
             >
               <motion.h1
+                id="about-heading"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-2xl md:text-3xl font-medium text-dark dark:text-light mb-4"
+                tabIndex={0}
+                role="heading"
+                aria-level="1"
               >
                 About Me
               </motion.h1>

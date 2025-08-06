@@ -32,7 +32,7 @@ const ContactChat = ({ isOpen, onClose }) => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 10, scale: 0.95 }}
           transition={{ type: "spring", duration: 0.5 }}
-          className="fixed left-4 bottom-20 w-72 bg-light/90 dark:bg-dark/90 backdrop-blur-lg rounded-2xl shadow-xl border border-dark/10 dark:border-light/10 overflow-hidden z-50"
+          className="fixed left-4 bottom-20 w-72 bg-light/90 dark:bg-dark/90 backdrop-blur-lg rounded-2xl shadow-xl border border-dark/10 dark:border-light/10 overflow-hidden z-50 contact-modal"
         >
           {/* Header with gradient */}
           <motion.div 
