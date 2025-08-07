@@ -105,6 +105,8 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
                 <motion.img
                   src={project.image}
                   alt={project.title}
+                  width={800}
+                  height={600}
                   className="block w-auto h-auto max-w-[85vw] max-h-[85vh] object-contain"
                   initial={{ scale: 1.02 }}
                   animate={{ scale: 1 }}
@@ -207,6 +209,8 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
         <motion.img
           src={project.image}
           alt={project.title}
+          width={400}
+          height={256}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           initial={{ scale: 1 }}
           whileHover={{ scale: 1.1 }}

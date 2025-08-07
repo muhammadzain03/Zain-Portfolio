@@ -10,7 +10,6 @@
  */
 
 import Head from 'next/head';
-import Image from 'next/image';
 import OptimizedImage from '@/components/OptimizedImage';
 import Contact from '@/components/Contact';
 import SEO from '@/components/SEO';

@@ -8,13 +8,9 @@ const nextConfig = {
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    loader: 'default',
-    path: '/_next/image',
-    disableStaticImages: false,
     unoptimized: false,
     domains: [],
   },
-  // Optimize page loading
   pageExtensions: ['js', 'jsx'],
   compress: true,
   crossOrigin: 'anonymous',
@@ -24,14 +20,12 @@ const nextConfig = {
   },
   poweredByHeader: false,
   generateEtags: false,
-  // Enable faster builds and better caching
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Add headers for better caching and performance
   async headers() {
     return [
       {
@@ -45,7 +39,6 @@ const nextConfig = {
             key: 'Strict-Transport-Security',
             value: 'max-age=63072000; includeSubDomains; preload'
           },
-
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff'
@@ -53,6 +46,42 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin'
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: process.env.NODE_ENV === 'development'
+              ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; object-src 'none'; frame-src 'self';"
+              : "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; object-src 'none'; frame-src 'self';"
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin'
+          }
+        ]
+      },
+      {
+        source: '/resume',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          }
+        ]
+      },
+      {
+        source: '/:path*.pdf',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400'
           }
         ]
       },
@@ -66,20 +95,27 @@ const nextConfig = {
         ]
       },
       {
-        source: '/:path*.pdf',
+        source: '/_next/static/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=86400'
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      },
+      {
+        source: '/favicon.ico',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
           }
         ]
       }
     ]
   },
   webpack: (config, { dev, isServer }) => {
-    // Production optimizations
     if (!dev && !isServer) {
-      // Optimize chunks and caching
       config.optimization = {
         ...config.optimization,
         runtimeChunk: 'single',
@@ -91,7 +127,6 @@ const nextConfig = {
           cacheGroups: {
             default: false,
             vendors: false,
-            // Vendor chunk for third-party libraries
             vendor: {
               name: 'vendor',
               chunks: 'all',
@@ -100,7 +135,6 @@ const nextConfig = {
               enforce: true,
               reuseExistingChunk: true,
             },
-            // Common chunk for shared code
             common: {
               name: 'common',
               minChunks: 2,
@@ -109,7 +143,6 @@ const nextConfig = {
               reuseExistingChunk: true,
               enforce: true,
             },
-            // Styles chunk for CSS
             styles: {
               name: 'styles',
               test: /\.(css|scss|sass)$/,
@@ -117,19 +150,26 @@ const nextConfig = {
               enforce: true,
               priority: 30,
             },
+            framerMotion: {
+              name: 'framer-motion',
+              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+              chunks: 'all',
+              priority: 25,
+              reuseExistingChunk: true,
+            },
+            reactIcons: {
+              name: 'react-icons',
+              test: /[\\/]node_modules[\\/]react-icons[\\/]/,
+              chunks: 'all',
+              priority: 25,
+              reuseExistingChunk: true,
+            },
           },
         },
       };
 
-      // Enable module concatenation
       config.optimization.concatenateModules = true;
-
-      // Add performance hints
-      config.performance = {
-        hints: 'warning',
-        maxEntrypointSize: 512000,
-        maxAssetSize: 512000,
-      };
+      config.optimization.usedExports = true;
     }
     
     return config;

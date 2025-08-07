@@ -16,6 +16,7 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/styles/**/*.{css,scss}",
   ],
   theme: {
     extend: {
@@ -38,8 +39,6 @@ module.exports = {
         'spin-cw': 'spin-cw 30s linear infinite',
         'gradient': 'gradient 6s ease infinite',
         'fadeIn': 'fadeIn 0.5s ease-in-out',
-        'ping': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
-        'bounce': 'bounce 1s infinite',
       },
       keyframes: {
         'spin-cw': {
@@ -60,22 +59,6 @@ module.exports = {
         fadeIn: {
           '0%': { opacity: '0', transform: 'translateY(-10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        ping: {
-          '75%, 100%': {
-            transform: 'scale(2)',
-            opacity: '0',
-          },
-        },
-        bounce: {
-          '0%, 100%': {
-            transform: 'translateY(-25%)',
-            animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
-          },
-          '50%': {
-            transform: 'none',
-            animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
-          },
         },
       },
     },

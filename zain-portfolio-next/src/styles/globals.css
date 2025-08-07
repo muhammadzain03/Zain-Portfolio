@@ -14,43 +14,6 @@ body {
   color: #1f2937;
 }
 
-/* Fade-in animation for AnimatedText */
-@keyframes fade-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease forwards;
-}
-
-/* Nav link underline animation */
-.nav-link {
-  position: relative;
-  display: inline-block;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  height: 2px;
-  width: 0;
-  background-color: currentColor;
-  transition: width 0.3s ease-in-out;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
 /* Enhanced Performance optimizations */
 * {
   will-change: auto;
@@ -80,13 +43,6 @@ img {
 html, body {
   scroll-behavior: smooth;
   overscroll-behavior-y: none;
-}
-
-/* Better modal backdrop performance */
-.modal-backdrop {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transform: translateZ(0);
 }
 
 /* Reduce motion for users who prefer it */
@@ -168,20 +124,4 @@ button, a, [role="button"] {
   contain: layout style;
   will-change: transform;
   cursor: pointer;
-}
-
-/* Optimize animations for performance */
-@keyframes optimized-fade-in {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.fast-fade-in {
-  animation: optimized-fade-in 0.3s ease-out forwards;
 }
