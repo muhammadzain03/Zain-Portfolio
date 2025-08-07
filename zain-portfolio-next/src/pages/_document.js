@@ -48,6 +48,9 @@ export default function Document() {
           />
         </noscript>
         
+        {/* Preload LCP image only */}
+        <link rel="preload" href="/images/profile/zain.jpg" as="image" type="image/jpeg" />
+        
         {/* Security Headers */}
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
@@ -116,6 +119,32 @@ export default function Document() {
       <body className="bg-gray-50 text-gray-800">
         <Main />
         <NextScript />
+        
+        {/* Performance Monitoring Script */}
+        <Script
+          id="performance-monitor"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Monitor Core Web Vitals
+              if (typeof window !== 'undefined') {
+                window.addEventListener('load', function() {
+                  // Report LCP if available
+                  if ('PerformanceObserver' in window) {
+                    const observer = new PerformanceObserver((list) => {
+                      for (const entry of list.getEntries()) {
+                        if (entry.entryType === 'largest-contentful-paint') {
+                          console.log('LCP:', entry.startTime);
+                        }
+                      }
+                    });
+                    observer.observe({ entryTypes: ['largest-contentful-paint'] });
+                  }
+                });
+              }
+            `
+          }}
+        />
       </body>
     </Html>
   );
