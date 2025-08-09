@@ -65,7 +65,11 @@ const OptimizedImage = ({
         placeholder={placeholder}
         blurDataURL={blurDataURL}
         sizes={sizes}
-        className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+        className={
+          priority
+            ? ''
+            : `transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`
+        }
         onLoad={handleLoad}
         onError={handleError}
         style={{
@@ -76,7 +80,7 @@ const OptimizedImage = ({
       />
       
       {/* Loading placeholder */}
-      {isLoading && (
+      {!priority && isLoading && (
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primaryDark/10 animate-pulse" />
       )}
     </div>

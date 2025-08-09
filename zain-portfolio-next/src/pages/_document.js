@@ -16,10 +16,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Resource Hints */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Keep head light; avoid over-preconnecting to improve LCP consistency */}
         
         {/* Performance Optimizations */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />

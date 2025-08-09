@@ -222,7 +222,8 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
             alt={project.title}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            priority={index === 0}
             style={{ transform: 'translateZ(0)' }}
             sizes="(min-width: 1024px) 50vw, 100vw"
           />
@@ -238,6 +239,9 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
             playsInline
             preload="metadata"
             style={{ transform: 'translateZ(0)' }}
+            aria-hidden="true"
+            role="presentation"
+            tabIndex={-1}
             onMouseEnter={(e) => {
               e.target.currentTime = 0;
               e.target.play().catch(() => {});
@@ -274,14 +278,14 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
 
       {/* Project Content */}
       <div className="p-6">
-        <motion.h3
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: index * 0.2 + 0.4 }}
           className="text-xl font-bold text-dark dark:text-light mb-3 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors duration-300"
         >
           {project.title}
-        </motion.h3>
+        </motion.h2>
         
         <motion.p
           initial={{ opacity: 0, y: 20 }}
