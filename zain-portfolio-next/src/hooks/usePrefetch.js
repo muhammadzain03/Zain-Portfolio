@@ -14,11 +14,13 @@ export const usePrefetch = () => {
   const router = useRouter();
   const prefetchedRoutes = useRef(new Set());
 
-  const prefetchRoute = useCallback((route, priority = false) => {
+  // Next.js pages router prefetch signature is prefetch(href: string, asPath?: string)
+  // Avoid passing an object (would cause indexOf errors). Priority is ignored here.
+  const prefetchRoute = useCallback((route) => {
     if (!router.isReady || prefetchedRoutes.current.has(route)) return;
 
     try {
-      router.prefetch(route, { priority });
+      router.prefetch(route);
       prefetchedRoutes.current.add(route);
     } catch (error) {
       console.warn(`Failed to prefetch ${route}:`, error);
@@ -34,9 +36,7 @@ export const usePrefetch = () => {
     const prefetch = window.requestIdleCallback || ((cb) => setTimeout(cb, 0));
     
     prefetch(() => {
-      routes.forEach(route => {
-        prefetchRoute(route, true);
-      });
+      routes.forEach(route => prefetchRoute(route));
     });
   }, [router.isReady, prefetchRoute]);
 
@@ -50,9 +50,7 @@ export const usePrefetch = () => {
     const handleRouteChange = () => {
       const routes = ['/', '/about', '/projects', '/resume', '/leetcode'];
       routes.forEach(route => {
-        if (route !== router.asPath) {
-          prefetchRoute(route);
-        }
+        if (route !== router.asPath) prefetchRoute(route);
       });
     };
 
