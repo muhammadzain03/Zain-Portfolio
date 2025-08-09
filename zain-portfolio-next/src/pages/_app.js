@@ -17,6 +17,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Head from 'next/head';
+// Chore: minor commit marker
 import { usePrefetch } from '@/hooks/usePrefetch';
 
 export default function App({ Component, pageProps }) {
