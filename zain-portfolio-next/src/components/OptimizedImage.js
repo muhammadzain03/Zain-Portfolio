@@ -54,7 +54,6 @@ const OptimizedImage = ({
   return (
     <div 
       className={`relative overflow-hidden ${className}`}
-      style={calculatedAspectRatio ? { aspectRatio: calculatedAspectRatio } : {}}
     >
       <Image
         src={src}
@@ -72,8 +71,6 @@ const OptimizedImage = ({
         style={{
           objectFit: 'cover',
           objectPosition: 'center',
-          width: '100%',
-          height: '100%',
         }}
         {...props}
       />

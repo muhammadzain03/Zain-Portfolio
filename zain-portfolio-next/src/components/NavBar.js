@@ -66,19 +66,6 @@ export default function NavBar() {
             <Link
               href="/resume"
               prefetch={true}
-              onMouseEnter={() => {
-                // Preload PDF on hover for instant loading (client-side only)
-                if (typeof window !== 'undefined') {
-                  const existingLink = document.querySelector('link[href="/Muhammad-Zain-Resume.pdf"]');
-                  if (!existingLink) {
-                    const link = document.createElement('link');
-                    link.rel = 'prefetch';
-                    link.href = '/Muhammad-Zain-Resume.pdf';
-                    link.as = 'document';
-                    document.head.appendChild(link);
-                  }
-                }
-              }}
               className="relative text-dark/90 dark:text-light/90 hover:text-primary dark:hover:text-primaryDark transition-all duration-150 hover:scale-105 group"
             >
               Resume

@@ -13,16 +13,17 @@ import Head from 'next/head';
 const SEO = ({
   title = "Muhammad Zain | Software Engineering Student",
   description = "Third-year Software Engineering student at University of Calgary. Passionate about full-stack development, machine learning, and building impactful software solutions.",
-  canonical = "https://muhammadzain.dev",
-  ogImage = "/images/profile/zain.jpg",
+  canonical = "/",
+  ogImage = "/images/profile/zain.webp",
   ogType = "website",
   twitterCard = "summary_large_image",
   noindex = false,
   children
 }) => {
-  const siteUrl = "https://muhammadzain.dev";
-  const fullCanonical = canonical.startsWith('http') ? canonical : `${siteUrl}${canonical}`;
-  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+  const publicUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || '';
+  const baseUrl = publicUrl || 'https://muhammadzain.dev';
+  const fullCanonical = canonical.startsWith('http') ? canonical : `${baseUrl}${canonical}`;
+  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`;
 
   return (
     <Head>
@@ -64,7 +65,6 @@ const SEO = ({
       <meta property="profile:username" content="muhammad-zain03" />
       
       {/* Performance Hints */}
-      <link rel="preload" href="/images/profile/zain.jpg" as="image" />
       <link rel="prefetch" href="/Muhammad-Zain-Resume.pdf" />
       
       {/* Additional Custom Tags */}

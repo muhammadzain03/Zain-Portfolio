@@ -97,6 +97,8 @@ const ContactChat = ({ isOpen, onClose }) => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     className="text-xs text-primary dark:text-primaryDark mt-2"
+                    role="status"
+                    aria-live="polite"
                   >
                     Copied to clipboard!
                   </motion.p>
@@ -137,6 +139,8 @@ const ContactChat = ({ isOpen, onClose }) => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     className="text-xs text-primary dark:text-primaryDark mt-2"
+                    role="status"
+                    aria-live="polite"
                   >
                     Copied to clipboard!
                   </motion.p>

@@ -10,17 +10,13 @@
 
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import Head from "next/head";
+import LoadingIndicator from "./LoadingIndicator";
 
 export default function Layout({ children }) {
   return (
     <>
-      <Head>
-        <title>Muhammad Zain | Portfolio</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Software Engineer Portfolio for Muhammad Zain" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      {/* Head tags are managed per-page via SEO component */}
+      <LoadingIndicator />
       <div className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light">
         <NavBar />
         <main className="pt-16">{children}</main>

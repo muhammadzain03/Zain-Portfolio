@@ -48,12 +48,10 @@ export default function Document() {
           />
         </noscript>
         
-        {/* Preload LCP image only */}
-        <link rel="preload" href="/images/profile/zain.jpg" as="image" type="image/jpeg" />
+
         
-        {/* Security Headers */}
+        {/* Security Headers: governed by server headers; keep meta minimal to avoid conflicts */}
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
         <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
         
         {/* DNS Prefetch for External Resources */}
@@ -85,7 +83,7 @@ export default function Document() {
               "jobTitle": "Software Engineering Student",
               "description": "Third-year Software Engineering student at University of Calgary specializing in full-stack development, machine learning, and database systems.",
               "url": "https://muhammadzain.dev",
-              "image": "/images/profile/zain.jpg",
+              "image": "/images/profile/zain.webp",
               "sameAs": [
                 "https://github.com/muhammadzain03",
                 "https://linkedin.com/in/muhammad-zain03"
@@ -120,31 +118,7 @@ export default function Document() {
         <Main />
         <NextScript />
         
-        {/* Performance Monitoring Script */}
-        <Script
-          id="performance-monitor"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Monitor Core Web Vitals
-              if (typeof window !== 'undefined') {
-                window.addEventListener('load', function() {
-                  // Report LCP if available
-                  if ('PerformanceObserver' in window) {
-                    const observer = new PerformanceObserver((list) => {
-                      for (const entry of list.getEntries()) {
-                        if (entry.entryType === 'largest-contentful-paint') {
-                          console.log('LCP:', entry.startTime);
-                        }
-                      }
-                    });
-                    observer.observe({ entryTypes: ['largest-contentful-paint'] });
-                  }
-                });
-              }
-            `
-          }}
-        />
+        {/* Performance monitoring script removed to avoid inline scripting overhead */}
       </body>
     </Html>
   );

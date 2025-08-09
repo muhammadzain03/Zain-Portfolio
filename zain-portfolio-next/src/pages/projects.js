@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
-import Contact from '@/components/Contact';
+import dynamic from 'next/dynamic';
+const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 import SEO from '@/components/SEO';
 import { useState, useCallback, useMemo, memo } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaPlay, FaTimes } from 'react-icons/fa';
+import Image from 'next/image';
 
 // Project data
 const projects = [
@@ -12,7 +14,7 @@ const projects = [
     title: "CityX Subway Display System",
     category: "Real-Time Information Display",
     description: "A sophisticated Java-based subway information display system delivering real-time train tracking, weather updates, news feeds, and dynamic advertisements—mirroring the polish and reliability of major metro networks. Built with enterprise-level MVC architecture, multithreading, and API integrations for seamless live updates and smooth UI animations.",
-    image: "/images/projects/Subway Screen.png",
+    image: "/images/projects/Subway Screen Application.webp",
     video: "/images/projects/Subway Screen Application Video.mp4",
     github: "https://github.com/muhammadzain03/CityX-Subway-Display-System",
     technologies: ["Java", "MySQL", "Swing", "MVC", "Multithreading", "API Integration"],
@@ -23,7 +25,7 @@ const projects = [
     title: "Flight Operations Manager",
     category: "Airline Management Application",
     description: "A modern, user-friendly airline management system developed with C++ and Qt, enabling real-time scheduling, passenger management, and seat tracking for airlines and travel agencies. Features dynamic interactive seat maps, data visualization dashboards, and robust reporting to streamline daily operations.",
-    image: "/images/projects/Flight Operations.png",
+    image: "/images/projects/Flight Operations Manager.webp",
     video: "/images/projects/Flight Operations Manager Video.mp4",
     github: "https://github.com/muhammadzain03/Flight-Operations-Manager",
     technologies: ["C++", "Qt", "OOP", "JSON", "SQLite", "Data Visualization"],
@@ -34,8 +36,8 @@ const projects = [
     title: "TechVista Inc E-commerce Platform",
     category: "Full-Stack E-commerce Solution",
     description: "A modern, end-to-end e-commerce web platform built with React, Flask, and SQLite, featuring guest browsing, secure authentication, animated UI, and responsive layouts for seamless shopping on any device. Demonstrates best practices in API design, frontend/backend integration, and advanced UI techniques like glassmorphism.",
-    image: "/images/projects/TechVista Inc.jpeg",
-    video: "/images/projects/TechVista Inc Video.mp4",
+    image: "/images/projects/TechVista Inc.webp",
+    video: "/images/projects/Techvista Inc Video.mp4",
     github: "https://github.com/muhammadzain03/TechVista-Inc",
     technologies: ["React.js", "Flask", "SQLite", "REST APIs", "JavaScript", "Python"],
     hasVideo: true
@@ -45,7 +47,7 @@ const projects = [
     title: "Purrfect Innovations",
     category: "Frontend E-commerce Website",
     description: "A clean, static e-commerce website for cat enthusiasts, crafted using HTML and CSS to highlight best practices in responsive web design. Showcases a simple product catalog, user-friendly navigation, and polished layouts—all demonstrating frontend fundamentals and attention to accessibility.",
-    image: "/images/projects/Purrfect Innovations.png",
+    image: "/images/projects/Purrfect Innovations.webp",
     github: "https://github.com/muhammadzain03/Purrfect-Innovations",
     technologies: ["HTML", "CSS", "Responsive Design", "UI/UX"],
     hasVideo: false
@@ -55,7 +57,7 @@ const projects = [
     title: "Art Museum Database Management System",
     category: "Role-Based Database Solution",
     description: "A secure, Python-MySQL database application for art museum operations, featuring automated business rules, credential-based access, and easy management of collections, staff, and visitors. The system enforces data integrity with SQL triggers and role-based controls for reliable and safe museum operations.",
-    image: "/images/projects/Art Museum.png",
+    image: "/images/projects/Art Museum.webp",
     github: "https://github.com/muhammadzain03/Art-Museum-Database-Management-System-SQL",
     technologies: ["Python", "MySQL", "SQL", "Role-Based Access", "Security"],
     hasVideo: false
@@ -102,18 +104,22 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
             {!showVideo ? (
               // Adaptive Image Display
               <div className="relative">
-                <motion.img
-                  src={project.image}
-                  alt={project.title}
-                  width={800}
-                  height={600}
-                  className="block w-auto h-auto max-w-[85vw] max-h-[85vh] object-contain"
+                <motion.div
                   initial={{ scale: 1.02 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  loading="eager"
-                  style={{ transform: 'translateZ(0)' }}
-                />
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={800}
+                    height={600}
+                    className="block w-auto h-auto max-w-[85vw] max-h-[85vh] object-contain"
+                    loading="eager"
+                    style={{ transform: 'translateZ(0)' }}
+                    sizes="(max-width: 768px) 85vw, (max-width: 1200px) 85vw, 85vw"
+                  />
+                </motion.div>
                 
                 {/* Compact Video Play Button Overlay */}
                 {project.hasVideo && (
@@ -206,17 +212,21 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
         onClick={() => onCardClick(project)}
       >
         {/* Background Image */}
-        <motion.img
-          src={project.image}
-          alt={project.title}
-          width={400}
-          height={256}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        <motion.div
+          className="w-full h-full"
           initial={{ scale: 1 }}
           whileHover={{ scale: 1.1 }}
-          loading="lazy"
-          style={{ transform: 'translateZ(0)' }}
-        />
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            style={{ transform: 'translateZ(0)' }}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+          />
+        </motion.div>
         
         {/* Video Overlay (only for projects with videos) */}
         {project.hasVideo && (
@@ -356,12 +366,10 @@ export default function Projects() {
         ogType="website"
       />
       
-      <Head>
-        {/* Project-specific optimizations */}
-        <meta name="robots" content="index,follow" />
-        <link rel="preload" href="/images/projects/Subway Screen.png" as="image" />
-        <link rel="preload" href="/images/projects/Flight Operations.png" as="image" />
-      </Head>
+              <Head>
+          {/* Project-specific optimizations */}
+          <meta name="robots" content="index,follow" />
+        </Head>
 
       <main className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light">
         {/* Hero Section */}
@@ -466,7 +474,5 @@ export default function Projects() {
 export async function getStaticProps() {
   return {
     props: {},
-    // Revalidate every hour in production
-    revalidate: 3600,
   };
 }

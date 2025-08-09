@@ -31,6 +31,10 @@ const WebVitals = () => {
 
         // Largest Contentful Paint (LCP) - Target: < 2.5s
         getLCP((metric) => {
+          // Suppress console output in development
+          if (process.env.NODE_ENV === 'development') {
+            // LCP measured silently
+          }
           // Send to analytics if needed
           if (typeof window !== 'undefined' && window.gtag) {
             window.gtag('event', 'web_vitals', {

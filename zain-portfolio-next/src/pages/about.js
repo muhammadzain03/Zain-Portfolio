@@ -25,9 +25,9 @@ const Contact = dynamic(() => import('@/components/Contact'), {
 import SEO from '@/components/SEO';
 
 export default function About() {
-  const containerRef = useRef(null);
+  const scrollRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: scrollRef,
     offset: ["start end", "end start"]
   });
 
@@ -49,7 +49,8 @@ export default function About() {
         <meta name="format-detection" content="telephone=no" />
       </Head>
 
-      <main className="relative min-h-screen bg-light dark:bg-dark text-dark dark:text-light" ref={containerRef} role="main">
+      <div ref={scrollRef} className="relative">
+      <main className="relative min-h-screen bg-light dark:bg-dark text-dark dark:text-light" role="main">
         {/* Hero Section */}
         <section className="pt-24 pb-8 px-4 md:px-8 lg:px-16 xl:px-32" aria-labelledby="about-heading">
           <div className="max-w-7xl mx-auto">
@@ -253,6 +254,7 @@ export default function About() {
         {/* Circular Contact Component */}
         <Contact />
       </main>
+      </div>
     </>
   );
 }
