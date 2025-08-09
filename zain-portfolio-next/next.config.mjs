@@ -55,7 +55,7 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: process.env.NODE_ENV === 'development'
               ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; object-src 'none'; frame-src 'self';"
-              : "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; object-src 'none'; frame-src 'self';"
+              : "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; object-src 'none'; frame-src 'self';"
           },
           {
             key: 'Cross-Origin-Opener-Policy',
@@ -82,6 +82,10 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=86400'
+          },
+          {
+            key: 'Content-Type',
+            value: 'application/pdf'
           }
         ]
       },
@@ -170,6 +174,7 @@ const nextConfig = {
 
       config.optimization.concatenateModules = true;
       config.optimization.usedExports = true;
+      config.optimization.sideEffects = false;
     }
     
     return config;

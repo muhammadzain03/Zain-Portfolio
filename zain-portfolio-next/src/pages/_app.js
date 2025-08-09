@@ -6,6 +6,7 @@
  * - Theme provider setup
  * - Font optimization
  * - Global state management (if any)
+ * - Advanced routing optimizations
  */
 
 import Layout from "@/components/Layout";
@@ -16,38 +17,24 @@ import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Head from 'next/head';
+import { usePrefetch } from '@/hooks/usePrefetch';
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-
-  // Optimized prefetching for better performance
-  useEffect(() => {
-    // Only prefetch when router is ready and on idle
-    if (!router.isReady) return;
-    
-    const prefetchPages = () => {
-      if (typeof window === 'undefined') return;
-      
-      // Use requestIdleCallback for non-blocking prefetch
-      const prefetch = window.requestIdleCallback || ((cb) => setTimeout(cb, 0));
-      
-      prefetch(() => {
-        const routes = ['/', '/about', '/projects', '/leetcode', '/resume'];
-        routes.forEach(route => {
-          router.prefetch(route);
-        });
-      });
-    };
-
-    // Only prefetch after initial load
-    const timer = setTimeout(prefetchPages, 1000);
-    return () => clearTimeout(timer);
-  }, [router.isReady, router]);
+  
+  // Use custom prefetch hook for optimized routing
+  usePrefetch();
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange={false}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        {/* Performance optimizations */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
       </Head>
       <WebVitals />
       <Layout>

@@ -11,9 +11,11 @@
 
 import Head from 'next/head';
 import OptimizedImage from '@/components/OptimizedImage';
-import Contact from '@/components/Contact';
+import dynamic from 'next/dynamic';
+// Defer Contact to reduce initial JS without changing UI
+const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 import SEO from '@/components/SEO';
-import profilePic from "/public/images/profile/zain.jpg";
+import profilePic from "../../public/images/profile/zain.webp";
 import { motion } from 'framer-motion';
 
 export default function Home() {
@@ -146,7 +148,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="lg:col-span-7 space-y-4"
+                className="lg:col-span-6 space-y-4"
               >
                 {/* Opening Statement */}
                 <div className="space-y-2">
@@ -229,12 +231,12 @@ export default function Home() {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="lg:col-span-5 space-y-6"
+                className="lg:col-span-6 space-y-6"
               >
                 {/* Profile Image */}
                 <div className="relative">
                   <motion.div 
-                    className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-primaryDark/20 dark:from-primaryDark/20 dark:to-primary/20 rounded-2xl blur-2xl"
+                    className="absolute -inset-6 bg-gradient-to-r from-primary/20 to-primaryDark/20 dark:from-primaryDark/20 dark:to-primary/20 rounded-3xl blur-3xl"
                     animate={{ 
                       scale: [1, 1.05, 1],
                       rotate: [0, 5, 0] 
@@ -247,21 +249,20 @@ export default function Home() {
                   />
                   
                   <motion.div 
-                    className="relative bg-gradient-to-br from-[#dbeafe] to-[#ede9fe] dark:from-[#1e293b] dark:to-[#0f172a] p-2 rounded-2xl shadow-xl overflow-hidden group"
+                    className="relative bg-gradient-to-br from-[#dbeafe] to-[#ede9fe] dark:from-[#1e293b] dark:to-[#0f172a] p-2 rounded-3xl shadow-2xl overflow-hidden group"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="relative rounded-xl overflow-hidden">
+                    <div className="relative rounded-2xl overflow-hidden border border-primary/20 dark:border-primaryDark/20">
                       <OptimizedImage
                         src={profilePic}
                         alt="Muhammad Zain - Software Engineering Student at University of Calgary"
-                        width={500}
-                        height={600}
-                        aspectRatio={500/600}
+                        width={1000}
+                        height={800}
                         priority={true}
-                        quality={90}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover object-center transform group-hover:scale-105 transition-transform duration-500 priority-image"
+                        quality={100}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
+                        className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500 priority-image"
                         placeholder="blur"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

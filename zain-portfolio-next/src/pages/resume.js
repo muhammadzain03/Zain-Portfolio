@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import SEO from '@/components/SEO';
-import Contact from '@/components/Contact';
+import dynamic from 'next/dynamic';
+const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 
 export default function Resume() {
   return (
