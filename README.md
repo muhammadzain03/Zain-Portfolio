@@ -56,11 +56,7 @@ This is my personal portfolio. It showcases my background as a Software Engineer
 <a name="screenshots"></a>
 ## 🖼️ Screenshots
 
-> Representative visuals from the live site.
-
-| Hero / Profile | Projects Grid | Resume Viewer |
-| --- | --- | --- |
-| ![Hero](zain-portfolio-next/public/images/profile/zain.webp) | ![Projects](zain-portfolio-next/public/images/projects/TechVista%20Inc.webp) | ![Resume](zain-portfolio-next/public/Muhammad-Zain-Resume.pdf) |
+Representative visuals are on the live site. Below is the production Lighthouse score.
 
 <a name="tech-stack"></a>
 ## 🧰 Tech Stack
@@ -128,7 +124,7 @@ Zain Portfolio/
 
 The following score was captured from the production server.
 
-![Lighthouse score (production)](docs/Lighthouse-score.png)
+![Lighthouse score (production)](Lighthouse-score.png)
 
 <a name="development-vs-production"></a>
 ## 🧪 Development vs Production
