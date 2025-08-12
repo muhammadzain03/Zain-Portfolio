@@ -1,11 +1,6 @@
 /**
- * Web Vitals Component
- * Purpose: Monitor and optimize Core Web Vitals
- * Features:
- * - LCP optimization
- * - CLS prevention  
- * - FID measurement
- * - Performance tracking
+ * WebVitals.js
+ * Purpose: Optional web-vitals measurement (silent/no console in prod).
  */
 
 import { useEffect } from 'react';

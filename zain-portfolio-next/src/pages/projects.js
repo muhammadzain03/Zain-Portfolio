@@ -1,3 +1,7 @@
+/**
+ * pages/projects.js
+ * Purpose: Projects grid with modal image/video preview; motion-rich cards.
+ */
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';

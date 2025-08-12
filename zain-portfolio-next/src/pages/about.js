@@ -1,12 +1,6 @@
 /**
- * about.js
- * Purpose: About page showcasing personal story, skills, and background
- * Features:
- * - Scroll-triggered timeline animations
- * - Grouped skills section with reveal effects
- * - Professional journey narrative
- * - Personal interests and values
- * - Contact information
+ * pages/about.js
+ * Purpose: About page — story, skills timeline, interests; rich motion.
  */
 
 import Head from 'next/head';

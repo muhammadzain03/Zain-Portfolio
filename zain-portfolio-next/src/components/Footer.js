@@ -1,3 +1,7 @@
+/**
+ * Footer.js
+ * Purpose: Simple animated gradient footer with attribution.
+ */
 export default function Footer() {
     return (
       <footer className="w-full animate-fadeIn">

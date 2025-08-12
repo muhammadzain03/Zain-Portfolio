@@ -1,10 +1,6 @@
 /**
- * LoadingIndicator Component
- * Purpose: Shows loading state during page transitions
- * Features:
- * - Smooth loading animation
- * - Non-intrusive design
- * - Automatic show/hide
+ * LoadingIndicator.js
+ * Purpose: Thin top progress bar for route transitions; unobtrusive feedback.
  */
 
 import { motion, AnimatePresence } from 'framer-motion';

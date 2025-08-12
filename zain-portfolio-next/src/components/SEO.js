@@ -1,11 +1,6 @@
 /**
- * SEO Component
- * Purpose: Comprehensive SEO optimization for all pages
- * Features:
- * - Dynamic meta tags
- * - Open Graph optimization
- * - Twitter Card support
- * - Structured data integration
+ * SEO.js
+ * Purpose: Per-page metadata (title/description/canonical/OG/Twitter).
  */
 
 import Head from 'next/head';

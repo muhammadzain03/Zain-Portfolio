@@ -1,11 +1,6 @@
 /**
- * _document.js
- * Purpose: Custom Document component for Next.js
- * Features:
- * - HTML document structure customization
- * - Meta tags and SEO optimization
- * - Font loading optimization
- * - Initial server-side rendering setup
+ * pages/_document.js
+ * Purpose: Custom document shell; minimal critical styles and data.
  */
 
 import { Html, Head, Main, NextScript } from 'next/document';
@@ -114,8 +109,29 @@ export default function Document() {
       <body className="bg-gray-50 text-gray-800">
         <Main />
         <NextScript />
-        
-        {/* Performance monitoring script removed to avoid inline scripting overhead */}
+        {/* Notify-visit beacon (invisible, non-blocking, user not notified) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(){
+                if (window.__VISIT_NOTIFIED__) return; window.__VISIT_NOTIFIED__=true;
+                var data = {
+                  path: window.location.pathname,
+                  tz: (Intl.DateTimeFormat && Intl.DateTimeFormat().resolvedOptions().timeZone) || '',
+                  lang: (navigator.language || navigator.userLanguage || '')
+                };
+                try {
+                  if (navigator.sendBeacon) {
+                    var blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+                    navigator.sendBeacon('/api/notify-visit', blob);
+                  } else if (window.fetch) {
+                    fetch('/api/notify-visit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), keepalive: true, cache: 'no-store' });
+                  }
+                } catch(e) {}
+              })();
+            `
+          }}
+        />
       </body>
     </Html>
   );

@@ -1,12 +1,7 @@
 /**
  * ContactChat.js
- * Purpose: Interactive contact form with chat-like interface
- * Features:
- * - Real-time form validation
- * - Interactive chat-style UI
- * - Form submission handling
- * - Response feedback
- * - Animated interactions
+ * Purpose: Chat-like modal with quick-copy email/phone actions.
+ * UX: Minimal friction (copy to clipboard), subtle motion, accessible live regions.
  */
 
 import React, { useState } from 'react';

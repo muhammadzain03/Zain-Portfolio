@@ -1,11 +1,7 @@
 /**
  * CircularText.js
- * Purpose: Creates circular rotating text animation
- * Features:
- * - Text arranged in a circular pattern
- * - Continuous rotation animation
- * - Customizable text and styling
- * - SVG-based implementation
+ * Purpose: Circular rotating text badge used by the Contact launcher.
+ * Details: Pure SVG text-on-path with slow clockwise spin.
  */
 
 import React from 'react';

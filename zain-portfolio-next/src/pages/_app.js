@@ -1,12 +1,6 @@
 /**
- * _app.js
- * Purpose: Main application wrapper for the Next.js portfolio
- * Features:
- * - Global layout and styling
- * - Theme provider setup
- * - Font optimization
- * - Global state management (if any)
- * - Advanced routing optimizations
+ * pages/_app.js
+ * Purpose: App wrapper — theme provider, global styles, layout, route animations.
  */
 
 import Layout from "@/components/Layout";

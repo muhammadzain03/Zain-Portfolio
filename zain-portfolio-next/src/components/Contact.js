@@ -1,3 +1,8 @@
+/**
+ * Contact.js
+ * Purpose: Floating circular contact entry that opens the ContactChat modal.
+ * Notes: Fixed bottom-left; keeps UI minimal while providing quick actions.
+ */
 import React, { useState, useEffect } from 'react';
 import CircularText from './CircularText';
 import ContactChat from './ContactChat';
@@ -31,6 +36,7 @@ const Contact = () => {
   }, [isChatOpen]);
 
   return (
+    // Fixed launcher for the contact modal
     <div className="fixed left-4 bottom-4 flex items-end gap-4 z-50">
       <button 
         className="w-32 h-32 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 relative group contact-button"

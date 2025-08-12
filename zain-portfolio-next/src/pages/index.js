@@ -1,12 +1,6 @@
 /**
- * index.js
- * Purpose: Home page / Landing page of the portfolio website
- * Features:
- * - Hero section with personal introduction
- * - Featured projects showcase
- * - Skills and expertise highlights
- * - Contact information
- * - Animated components and transitions
+ * pages/index.js
+ * Purpose: Landing page — hero, intro, and profile image with motion.
  */
 
 import Head from 'next/head';
