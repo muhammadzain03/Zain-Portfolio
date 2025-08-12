@@ -1,12 +1,7 @@
 /**
  * NavBar.js
- * Purpose: Main navigation component for the portfolio website
- * Features:
- * - Responsive navigation with links to different sections
- * - Social media links and contact information
- * - Theme switcher integration
- * - Animated glass effect design with gradient
- * - Dark/Light mode support
+ * Purpose: Glassy top navigation with links, socials, and theme toggle.
+ * Notes: Uses Next Link prefetch; simplified hover prefetch to avoid runtime issues.
  */
 
 import Link from "next/link";

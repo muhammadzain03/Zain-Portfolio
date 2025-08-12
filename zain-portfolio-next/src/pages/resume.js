@@ -1,3 +1,7 @@
+/**
+ * pages/resume.js
+ * Purpose: Resume viewer with download + open-in-new-tab; embedded iframe.
+ */
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import SEO from '@/components/SEO';

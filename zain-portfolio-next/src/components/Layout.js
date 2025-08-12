@@ -1,11 +1,7 @@
 /**
  * Layout.js
- * Purpose: Main layout wrapper for consistent page structure
- * Features:
- * - Common layout elements (header, footer)
- * - Navigation integration
- * - Container sizing and padding
- * - Consistent styling across pages
+ * Purpose: Page chrome — persistent NavBar, Footer, and viewport/meta.
+ * Note: Per-page SEO is handled by the SEO component; Layout stays presentation-only.
  */
 
 import NavBar from "./NavBar";

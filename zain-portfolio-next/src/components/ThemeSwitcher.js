@@ -1,11 +1,6 @@
 /**
  * ThemeSwitcher.js
- * Purpose: Handles the dark/light theme switching functionality
- * Features:
- * - Toggle between dark and light themes
- * - Persists theme preference
- * - Smooth transition animations
- * - System theme detection
+ * Purpose: Toggle for light/dark theme using next-themes; minimal UI.
  */
 
 import { useTheme } from 'next-themes';

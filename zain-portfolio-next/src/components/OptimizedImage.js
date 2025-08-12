@@ -1,11 +1,6 @@
 /**
- * OptimizedImage Component
- * Purpose: Enhanced Next.js Image component with performance optimizations
- * Features:
- * - Automatic WebP/AVIF conversion
- * - Lazy loading with blur placeholder
- * - Responsive sizing
- * - Performance monitoring
+ * OptimizedImage.js
+ * Purpose: Thin wrapper around next/image with nicer loading states and blur.
  */
 
 import Image from 'next/image';

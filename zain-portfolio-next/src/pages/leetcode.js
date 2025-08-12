@@ -1,3 +1,7 @@
+/**
+ * pages/leetcode.js
+ * Purpose: Placeholder page for coding journey; animated cards with motion.
+ */
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import Contact from '@/components/Contact';
