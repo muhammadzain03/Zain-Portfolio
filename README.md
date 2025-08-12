@@ -29,8 +29,7 @@ Masterclass README for Muhammad Zain – Portfolio
 - [Features](#features)
 - [Performance and Accessibility](#performance-and-accessibility)
 - [Development vs Production](#development-vs-production)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
+- [Deployment](#deployment)
 - [Deployment](#deployment)
 - [Development Journey](#development-journey)
 - [Testing and Quality](#testing-and-quality)
@@ -129,35 +128,9 @@ The following score was captured from the production server.
 <a name="development-vs-production"></a>
 ## 🧪 Development vs Production
 
-- Dev adds HMR, react-refresh, websockets → expect lower Lighthouse in dev
-- Prod removes dev overlays, minifies, and tree-shakes → target scores achieved
-- Measure Lighthouse on: `npm run build && npm start`
+Development builds include HMR/react-refresh and websockets, which reduce Lighthouse scores. Production builds remove development overlays and enable minification and tree-shaking, which is reflected in the reported 100/100 metrics.
 
-<a name="getting-started"></a>
-## 🛠 Getting Started
 
-Prerequisites: Node 18+ recommended
-
-```bash
-cd zain-portfolio-next
-npm ci
-npm run dev
-```
-
-Production build:
-
-```bash
-npm run build
-npm start
-```
-
-<a name="environment-variables"></a>
-## 🔐 Environment Variables
-
-Create a `.env.local` (not committed) for local development if needed.
-
-- `NEXT_PUBLIC_SITE_URL` (recommended)
-  - e.g., `https://muhammadzain.vercel.app` (or your custom domain)
 
 <a name="deployment"></a>
 ## 🚢 Deployment
