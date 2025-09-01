@@ -1,10 +1,9 @@
 /**
  * Contact.js
- * Purpose: Enhanced floating contact with mobile optimizations and pulse animations.
- * Notes: Responsive sizing with improved mobile interactions.
+ * Purpose: Floating circular contact entry that opens the ContactChat modal.
+ * Notes: Fixed bottom-left; keeps UI minimal while providing quick actions.
  */
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import CircularText from './CircularText';
 import ContactChat from './ContactChat';
 
@@ -37,65 +36,18 @@ const Contact = () => {
   }, [isChatOpen]);
 
   return (
-    <div className="fixed left-3 sm:left-4 md:left-6 bottom-3 sm:bottom-4 md:bottom-6 flex items-end gap-2 sm:gap-4 z-50">
-      <motion.button 
-        className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center cursor-pointer relative group contact-button"
+    // Fixed launcher for the contact modal
+    <div className="fixed left-2 sm:left-4 bottom-2 sm:bottom-4 flex items-end gap-2 sm:gap-4 z-50">
+      <button 
+        className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 relative group contact-button"
         onClick={() => setIsChatOpen(true)}
         aria-label="Open contact chat"
         role="button"
-        whileHover={{ 
-          scale: 1.15,
-          boxShadow: [
-            '0 12px 40px rgba(99, 102, 241, 0.4)',
-            '0 0 0 8px rgba(99, 102, 241, 0.1)',
-            '0 0 30px rgba(99, 102, 241, 0.3)'
-          ].join(', ')
-        }}
-        whileTap={{ scale: 0.95 }}
-        animate={{
-          boxShadow: [
-            '0 0 0 0 rgba(99, 102, 241, 0.5)',
-            '0 0 0 12px rgba(99, 102, 241, 0)',
-            '0 0 0 0 rgba(99, 102, 241, 0)'
-          ]
-        }}
-        transition={{
-          boxShadow: {
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          },
-          scale: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
-          default: { duration: 0.4 }
-        }}
       >
-        {/* Enhanced glow effect */}
-        <motion.div 
-          className="absolute -inset-3 bg-gradient-to-r from-primary/20 to-primaryDark/20 dark:from-primaryDark/20 dark:to-primary/20 rounded-full blur-md"
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.5, 0.8, 0.5]
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        
-        {/* Background ring */}
-        <motion.div 
-          className="absolute -inset-1 rounded-full border-2 border-primary/30 dark:border-primaryDark/30"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-        />
-        
+        <div className="absolute -inset-2 bg-dark/5 dark:bg-light/5 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <CircularText onClick={() => setIsChatOpen(true)} />
-      </motion.button>
-      
-      <AnimatePresence>
-        <ContactChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
-      </AnimatePresence>
+      </button>
+      <ContactChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
 };
