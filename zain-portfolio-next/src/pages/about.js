@@ -114,10 +114,10 @@ export default function About() {
               className="max-w-4xl mx-auto text-center space-y-6"
             >
               <p className="text-xs md:text-sm text-dark/90 dark:text-light/90 leading-relaxed text-center">
-                Hi, I'm Muhammad Zain - a third-year Software Engineering student at the University of Calgary with a passion for building meaningful technology. My journey from Karachi to Calgary has shaped my adaptability, drive, and growth mindset. I'm energized by solving real-world problems, collaborating on diverse teams, and always learning something new.
+                Hi, I&apos;m Muhammad Zain - a third-year Software Engineering student at the University of Calgary with a passion for building meaningful technology. My journey from Karachi to Calgary has shaped my adaptability, drive, and growth mindset. I&apos;m energized by solving real-world problems, collaborating on diverse teams, and always learning something new.
               </p>
               <p className="text-xs md:text-sm text-dark/80 dark:text-light/80 leading-relaxed text-center">
-                I thrive in feedback-driven environments and value building software that is scalable, clean, and impactful. I see every challenge as an opportunity for growth—whether that's debugging a complex system, optimizing a database query, or learning a new stack. My experience spans academic projects, freelance work, and continuous self-driven learning.
+                I thrive in feedback-driven environments and value building software that is scalable, clean, and impactful. I see every challenge as an opportunity for growth—whether that&apos;s debugging a complex system, optimizing a database query, or learning a new stack. My experience spans academic projects, freelance work, and continuous self-driven learning.
               </p>
             </motion.div>
           </div>
@@ -430,7 +430,7 @@ function PersonalInterestsIcons() {
           className="text-center"
         >
           <p className="text-xs md:text-sm text-dark/80 dark:text-light/80 mb-6 max-w-3xl mx-auto">
-            When I'm not working with code, you'll find me playing football, analyzing chess endgames, or breaking down a Christopher Nolan film.
+            When I&apos;m not working with code, you&apos;ll find me playing football, analyzing chess endgames, or breaking down a Christopher Nolan film.
           </p>
           
           {/* Animated Interest Icons */}
