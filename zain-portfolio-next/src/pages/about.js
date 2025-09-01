@@ -59,7 +59,7 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-medium text-dark dark:text-light mb-3 sm:mb-4"
+                className="text-2xl md:text-3xl font-medium text-dark dark:text-light mb-4"
                 tabIndex={0}
                 role="heading"
                 aria-level="1"
@@ -80,10 +80,10 @@ export default function About() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="max-w-4xl mx-auto text-center space-y-6"
             >
-              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/90 dark:text-light/90 leading-relaxed text-center">
+              <p className="text-xs md:text-sm text-dark/90 dark:text-light/90 leading-relaxed text-center">
                 Hi, I'm Muhammad Zain - a third-year Software Engineering student at the University of Calgary with a passion for building meaningful technology. My journey from Karachi to Calgary has shaped my adaptability, drive, and growth mindset. I'm energized by solving real-world problems, collaborating on diverse teams, and always learning something new.
               </p>
-              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 leading-relaxed text-center">
+              <p className="text-xs md:text-sm text-dark/80 dark:text-light/80 leading-relaxed text-center">
                 I thrive in feedback-driven environments and value building software that is scalable, clean, and impactful. I see every challenge as an opportunity for growth—whether that's debugging a complex system, optimizing a database query, or learning a new stack. My experience spans academic projects, freelance work, and continuous self-driven learning.
               </p>
             </motion.div>

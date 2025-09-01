@@ -95,7 +95,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl text-dark/60 dark:text-light/60 tracking-wide mb-1 sm:mb-2"
+                className="text-sm md:text-base text-dark/60 dark:text-light/60 tracking-wide mb-2"
               >
                 Muhammad Zain's Portfolio
               </motion.p>
@@ -105,7 +105,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-medium text-dark dark:text-light tracking-tight leading-tight sm:leading-relaxed"
+                className="text-2xl md:text-3xl font-medium text-dark dark:text-light tracking-tight leading-relaxed"
               >
                 Turning{" "}
                 <span className="relative inline-block">
@@ -150,7 +150,7 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 }}
-                    className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-medium text-dark dark:text-light italic"
+                    className="text-sm md:text-base font-medium text-dark dark:text-light italic"
                   >
                     Some people see lines of code.
                   </motion.h2>
@@ -158,7 +158,7 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.8 }}
-                    className="text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 italic"
+                    className="text-xs md:text-sm text-dark/80 dark:text-light/80 italic"
                   >
                     I see solutions, stories, and systems waiting to be built.
                   </motion.h3>
@@ -169,7 +169,7 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1 }}
-                  className="text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/75 dark:text-light/75 text-justify"
+                  className="text-xs md:text-sm text-dark/75 dark:text-light/75 text-justify"
                 >
                   Whether it's a real-time subway display system, a machine learning–powered airline manager, or a full-stack e-commerce platform, I strive to build software that is both functional and meaningful.
                 </motion.p>
@@ -179,7 +179,7 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.2 }}
-                  className="text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/75 dark:text-light/75 text-justify"
+                  className="text-xs md:text-sm text-dark/75 dark:text-light/75 text-justify"
                 >
                   I'm Muhammad Zain, a Software Engineering student at the University of Calgary. As someone actively seeking internship opportunities, I view this phase of my academic and professional life as a chance to explore, experiment, and take creative risks. It's a time to step into different fields, learn by building, and discover where I truly belong in the tech world.
                 </motion.p>
@@ -191,7 +191,7 @@ export default function Home() {
                   transition={{ delay: 1.4 }}
                   className="space-y-2"
                 >
-                  <h4 className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-medium text-dark dark:text-light">Some of the projects I've worked on recently include:</h4>
+                  <h4 className="text-xs md:text-sm font-medium text-dark dark:text-light">Some of the projects I've worked on recently include:</h4>
                   <ul className="space-y-1.5">
                     {recentProjects.map((project, index) => (
                       <motion.li
@@ -199,7 +199,7 @@ export default function Home() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 1.6 + index * 0.1 }}
-                        className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/75 dark:text-light/75 flex items-start space-x-2"
+                        className="text-xs md:text-sm text-dark/75 dark:text-light/75 flex items-center space-x-2"
                       >
                         <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-primary dark:bg-primaryDark flex-shrink-0 mt-1 sm:mt-0.5" />
                         <span>{project}</span>
@@ -215,8 +215,8 @@ export default function Home() {
                   transition={{ delay: 2 }}
                   className="space-y-1.5"
                 >
-                  <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/75 dark:text-light/75 text-justify">This site is a glimpse into what I create when curiosity meets code.</p>
-                  <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark dark:text-light font-medium text-justify">Go ahead — explore the things I've built, solved, and learned along the way.</p>
+                  <p className="text-xs md:text-sm text-dark/75 dark:text-light/75 text-justify">This site is a glimpse into what I create when curiosity meets code.</p>
+                  <p className="text-xs md:text-sm text-dark dark:text-light font-medium text-justify">Go ahead — explore the things I've built, solved, and learned along the way.</p>
                 </motion.div>
               </motion.div>
 
@@ -269,7 +269,7 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.8 }}
-                  className="space-y-3 text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/75 dark:text-light/75"
+                  className="space-y-3 text-xs md:text-sm text-dark/75 dark:text-light/75"
                 >
                   <p className="text-justify">
                     My enthusiasm lies in building meaningful software across a variety of domains - from immersive user experiences to scalable systems and intelligent automation. While pursuing my degree, I'm intentionally exploring areas like game development and VR/AR, cloud engineering and DevOps, full-stack web development, AI and machine learning, software testing, and robotics to better understand what resonates most with me.
