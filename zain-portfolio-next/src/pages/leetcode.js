@@ -47,7 +47,7 @@ export default function Leetcode() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 max-w-3xl mx-auto leading-relaxed text-justify"
+                className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 max-w-3xl mx-auto leading-relaxed text-center"
               >
                 Documenting my competitive programming journey, algorithmic thinking, and problem-solving adventures on LeetCode and beyond.
               </motion.p>
@@ -82,7 +82,7 @@ export default function Leetcode() {
                   Building My Coding Foundation
                 </h2>
                 
-                <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/70 dark:text-light/70 mb-6 sm:mb-8 max-w-2xl mx-auto text-justify">
+                <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/70 dark:text-light/70 mb-6 sm:mb-8 max-w-2xl mx-auto text-center">
                   Currently focusing on strengthening my algorithmic thinking and problem-solving skills. This section will soon showcase my LeetCode statistics, favorite problems, and coding insights.
                 </p>
 

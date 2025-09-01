@@ -80,10 +80,10 @@ export default function About() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="max-w-4xl mx-auto text-center space-y-6"
             >
-              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/90 dark:text-light/90 leading-relaxed text-justify">
-                Hi, I'm Muhammad Zain—a third-year Software Engineering student at the University of Calgary with a passion for building meaningful technology. My journey from Karachi to Calgary has shaped my adaptability, drive, and growth mindset. I'm energized by solving real-world problems, collaborating on diverse teams, and always learning something new.
+              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/90 dark:text-light/90 leading-relaxed text-center">
+                Hi, I'm Muhammad Zain - a third-year Software Engineering student at the University of Calgary with a passion for building meaningful technology. My journey from Karachi to Calgary has shaped my adaptability, drive, and growth mindset. I'm energized by solving real-world problems, collaborating on diverse teams, and always learning something new.
               </p>
-              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 leading-relaxed text-justify">
+              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 leading-relaxed text-center">
                 I thrive in feedback-driven environments and value building software that is scalable, clean, and impactful. I see every challenge as an opportunity for growth—whether that's debugging a complex system, optimizing a database query, or learning a new stack. My experience spans academic projects, freelance work, and continuous self-driven learning.
               </p>
             </motion.div>
@@ -365,7 +365,7 @@ function WorkValuesSection() {
               className="flex items-start space-x-3 p-4 rounded-xl hover:bg-light/50 dark:hover:bg-dark/50 transition-colors duration-200"
             >
               <div className="w-2 h-2 bg-primary dark:bg-primaryDark rounded-full mt-2 flex-shrink-0"></div>
-              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 leading-relaxed text-justify">{value}</p>
+              <p className="text-xs sm:text-sm lg:text-sm xl:text-base 2xl:text-lg text-dark/80 dark:text-light/80 leading-relaxed text-justify">{value}</p>
             </motion.div>
           ))}
         </div>
