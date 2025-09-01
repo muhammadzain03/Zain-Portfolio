@@ -33,6 +33,14 @@ export default function NavBar() {
     };
   }, [isMobileMenuOpen]);
 
+  // Handle cursor tracking for interactive light
+  const handleMouseMove = (e) => {
+    const navbar = e.currentTarget;
+    const rect = navbar.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    navbar.style.setProperty('--cursor-x', `${x}%`);
+  };
+
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
@@ -53,17 +61,20 @@ export default function NavBar() {
 
   return (
     <header className="w-full fixed top-0 left-0 z-50 animate-fadeIn">
-      {/* Animated gradient line */}
-      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 dark:via-primaryDark/50 to-transparent animate-gradient"></div>
+      {/* Bright breathing gradient line - matching profile picture colors */}
+      <div className="absolute bottom-0 left-0 w-full h-[2px] navbar-bright-glow animate-breathing"></div>
       
       {/* Main Navigation */}
-      <nav className="px-4 sm:px-6 md:px-8 h-14 sm:h-16 flex justify-between items-center 
-        bg-gradient-to-r from-light/90 via-light/85 to-light/90 
-        dark:from-dark/90 dark:via-dark/85 dark:to-dark/90 
-        backdrop-blur-xl backdrop-saturate-200 
-        shadow-lg shadow-black/[0.05] dark:shadow-white/[0.03]
-        border border-white/20 dark:border-black/20
-        transition-all duration-300 ease-in-out">
+      <nav 
+        className="navbar-interactive px-4 sm:px-6 md:px-8 h-14 sm:h-16 flex justify-between items-center 
+          bg-gradient-to-r from-light/90 via-light/85 to-light/90 
+          dark:from-dark/90 dark:via-dark/85 dark:to-dark/90 
+          backdrop-blur-xl backdrop-saturate-200 
+          shadow-lg shadow-black/[0.05] dark:shadow-white/[0.03]
+          border border-white/20 dark:border-black/20
+          transition-all duration-300 ease-in-out"
+        onMouseMove={handleMouseMove}
+      >
         
         {/* Desktop Navigation Links */}
         <ul className="hidden md:flex space-x-6 text-sm font-medium">

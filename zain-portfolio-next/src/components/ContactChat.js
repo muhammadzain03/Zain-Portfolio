@@ -36,7 +36,7 @@ const ContactChat = ({ isOpen, onClose }) => {
             transition={{ delay: 0.2 }}
             className="bg-gradient-to-r from-primary via-primary/90 to-primaryDark p-4 flex justify-between items-center"
           >
-            <h3 className="font-medium text-light">Let's Connect!</h3>
+            <h3 className="font-medium text-light">Let&apos;s Connect!</h3>
             <motion.button 
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}

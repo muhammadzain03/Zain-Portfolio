@@ -97,7 +97,7 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-sm md:text-base text-dark/60 dark:text-light/60 tracking-wide mb-2"
               >
-                Muhammad Zain's Portfolio
+                Muhammad Zain&apos;s Portfolio
               </motion.p>
 
               {/* Main heading with simplified layout */}
@@ -171,7 +171,7 @@ export default function Home() {
                   transition={{ delay: 1 }}
                   className="text-xs md:text-sm text-dark/75 dark:text-light/75 text-justify"
                 >
-                  Whether it's a real-time subway display system, a machine learning–powered airline manager, or a full-stack e-commerce platform, I strive to build software that is both functional and meaningful.
+                  Whether it&apos;s a real-time subway display system, a machine learning–powered airline manager, or a full-stack e-commerce platform, I strive to build software that is both functional and meaningful.
                 </motion.p>
 
                 {/* Personal Introduction */}
@@ -181,7 +181,7 @@ export default function Home() {
                   transition={{ delay: 1.2 }}
                   className="text-xs md:text-sm text-dark/75 dark:text-light/75 text-justify"
                 >
-                  I'm Muhammad Zain, a Software Engineering student at the University of Calgary. As someone actively seeking internship opportunities, I view this phase of my academic and professional life as a chance to explore, experiment, and take creative risks. It's a time to step into different fields, learn by building, and discover where I truly belong in the tech world.
+                  I&apos;m Muhammad Zain, a Software Engineering student at the University of Calgary. As someone actively seeking internship opportunities, I view this phase of my academic and professional life as a chance to explore, experiment, and take creative risks. It&apos;s a time to step into different fields, learn by building, and discover where I truly belong in the tech world.
                 </motion.p>
 
                 {/* Recent Projects */}
@@ -191,7 +191,7 @@ export default function Home() {
                   transition={{ delay: 1.4 }}
                   className="space-y-2"
                 >
-                  <h4 className="text-xs md:text-sm font-medium text-dark dark:text-light">Some of the projects I've worked on recently include:</h4>
+                  <h4 className="text-xs md:text-sm font-medium text-dark dark:text-light">Some of the projects I&apos;ve worked on recently include:</h4>
                   <ul className="space-y-1.5">
                     {recentProjects.map((project, index) => (
                       <motion.li
@@ -216,7 +216,7 @@ export default function Home() {
                   className="space-y-1.5"
                 >
                   <p className="text-xs md:text-sm text-dark/75 dark:text-light/75 text-justify">This site is a glimpse into what I create when curiosity meets code.</p>
-                  <p className="text-xs md:text-sm text-dark dark:text-light font-medium text-justify">Go ahead — explore the things I've built, solved, and learned along the way.</p>
+                  <p className="text-xs md:text-sm text-dark dark:text-light font-medium text-justify">Go ahead — explore the things I&apos;ve built, solved, and learned along the way.</p>
                 </motion.div>
               </motion.div>
 
@@ -247,7 +247,7 @@ export default function Home() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="relative rounded-2xl overflow-hidden border border-primary/20 dark:border-primaryDark/20">
+                    <div className="profile-glow-enhanced relative rounded-2xl overflow-hidden border border-primary/20 dark:border-primaryDark/20">
                       <OptimizedImage
                         src={profilePic}
                         alt="Muhammad Zain - Software Engineering Student at University of Calgary"
@@ -272,10 +272,10 @@ export default function Home() {
                   className="space-y-3 text-xs md:text-sm text-dark/75 dark:text-light/75"
                 >
                   <p className="text-justify">
-                    My enthusiasm lies in building meaningful software across a variety of domains - from immersive user experiences to scalable systems and intelligent automation. While pursuing my degree, I'm intentionally exploring areas like game development and VR/AR, cloud engineering and DevOps, full-stack web development, AI and machine learning, software testing, and robotics to better understand what resonates most with me.
+                    My enthusiasm lies in building meaningful software across a variety of domains - from immersive user experiences to scalable systems and intelligent automation. While pursuing my degree, I&apos;m intentionally exploring areas like game development and VR/AR, cloud engineering and DevOps, full-stack web development, AI and machine learning, software testing, and robotics to better understand what resonates most with me.
                   </p>
                   <p className="text-justify">
-                    Being a student gives me the freedom to try new things, take risks, and grow through hands-on work. I'm excited to apply these skills in the industry, gain real-world exposure, and eventually find the area where I can make the greatest impact.
+                    Being a student gives me the freedom to try new things, take risks, and grow through hands-on work. I&apos;m excited to apply these skills in the industry, gain real-world exposure, and eventually find the area where I can make the greatest impact.
                   </p>
                 </motion.div>
               </motion.div>
