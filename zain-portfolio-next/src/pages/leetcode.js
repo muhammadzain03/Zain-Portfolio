@@ -31,7 +31,7 @@ export default function Leetcode() {
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary bg-clip-text text-transparent"
+                className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary bg-clip-text text-transparent"
               >
                 LeetCode Journey
               </motion.h1>
@@ -47,7 +47,7 @@ export default function Leetcode() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 max-w-3xl mx-auto leading-relaxed text-center"
+                className="text-xs md:text-sm text-dark/80 dark:text-light/80 max-w-3xl mx-auto leading-relaxed text-center"
               >
                 Documenting my competitive programming journey, algorithmic thinking, and problem-solving adventures on LeetCode and beyond.
               </motion.p>
@@ -78,11 +78,11 @@ export default function Leetcode() {
                   </div>
                 </motion.div>
                 
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-semibold mb-3 sm:mb-4 text-dark dark:text-light">
+                <h2 className="text-xl md:text-2xl font-semibold mb-4 text-dark dark:text-light">
                   Building My Coding Foundation
                 </h2>
                 
-                <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/70 dark:text-light/70 mb-6 sm:mb-8 max-w-2xl mx-auto text-center">
+                <p className="text-xs md:text-sm text-dark/70 dark:text-light/70 mb-8 max-w-2xl mx-auto text-center">
                   Currently focusing on strengthening my algorithmic thinking and problem-solving skills. This section will soon showcase my LeetCode statistics, favorite problems, and coding insights.
                 </p>
 
