@@ -25,8 +25,8 @@ export default function Resume() {
 
       <main className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light">
         {/* Header */}
-        <section className="pt-24 pb-8 px-4 md:px-8 lg:px-16 xl:px-32">
-          <div className="max-w-7xl mx-auto">
+        <section className="pt-20 sm:pt-24 pb-6 sm:pb-8 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 2xl:px-48">
+          <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -37,12 +37,17 @@ export default function Resume() {
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary bg-clip-text text-transparent"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary bg-clip-text text-transparent"
               >
                 Resume
               </motion.h1>
               
-              <div className="w-16 h-[2px] bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary mx-auto mb-6" />
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="w-20 sm:w-24 md:w-28 h-[2px] bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary mx-auto mb-6"
+              />
               
               {/* Download Button */}
               <motion.a
@@ -136,7 +141,7 @@ export default function Resume() {
 
         {/* Open in New Tab Button */}
         <section className="pb-16 px-4 md:px-8 lg:px-16 xl:px-32">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}

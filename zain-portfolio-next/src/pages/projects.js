@@ -295,7 +295,7 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
-          className="text-sm text-dark/70 dark:text-light/70 mb-4 leading-relaxed"
+          className="text-sm text-dark/70 dark:text-light/70 mb-4 leading-relaxed text-justify"
         >
           {project.description}
         </motion.p>
@@ -381,8 +381,8 @@ export default function Projects() {
 
       <main className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 px-4 md:px-8 lg:px-16 xl:px-32">
-          <div className="max-w-7xl mx-auto">
+        <section className="pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 2xl:px-48">
+          <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -393,18 +393,23 @@ export default function Projects() {
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary bg-clip-text text-transparent"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary bg-clip-text text-transparent"
               >
                 My Projects
               </motion.h1>
               
-              <div className="w-16 h-[2px] bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary mx-auto mb-8" />
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="w-20 sm:w-24 md:w-28 h-[2px] bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary mx-auto mb-8"
+              />
               
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xs md:text-sm text-dark/80 dark:text-light/80 max-w-3xl mx-auto leading-relaxed"
+                className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 max-w-3xl mx-auto leading-relaxed text-justify"
               >
                 Explore my journey through code, creativity, and problem-solving. Each project represents a milestone in my development as a software engineer, showcasing diverse technologies and innovative solutions.
               </motion.p>

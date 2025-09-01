@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 dark:via-primaryDark/50 to-transparent animate-gradient"></div>
         
         {/* Enhanced glass effect background with gradient */}
-        <div className="px-8 h-16 flex flex-col justify-center items-center 
+        <div className="px-4 sm:px-6 md:px-8 h-14 sm:h-16 flex flex-col justify-center items-center 
           bg-gradient-to-r from-light/90 via-light/85 to-light/90 
           dark:from-dark/90 dark:via-dark/85 dark:to-dark/90 
           backdrop-blur-xl backdrop-saturate-200 
@@ -22,7 +22,7 @@ export default function Footer() {
           {/* Animated gradient line at the bottom */}
           <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 dark:via-primaryDark/50 to-transparent animate-gradient"></div>
           
-          <p className="text-sm font-medium text-dark/90 dark:text-light/90 text-center">
+          <p className="text-xs sm:text-sm font-medium text-dark/90 dark:text-light/90 text-center">
             &copy; {new Date().getFullYear()} Muhammad Zain. All rights reserved.
           </p>
           <p className="text-sm font-medium text-dark/90 dark:text-light/90 text-center mt-1">

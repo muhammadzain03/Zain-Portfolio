@@ -15,7 +15,7 @@ export default function Layout({ children }) {
       <LoadingIndicator />
       <div className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light">
         <NavBar />
-        <main className="pt-16">{children}</main>
+        <main className="pt-14 sm:pt-16">{children}</main>
         <Footer />
       </div>
     </>

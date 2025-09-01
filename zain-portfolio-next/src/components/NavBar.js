@@ -16,7 +16,7 @@ export default function NavBar() {
       <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 dark:via-primaryDark/50 to-transparent animate-gradient"></div>
       
       {/* Enhanced glass effect background with gradient */}
-      <nav className="px-8 h-16 flex justify-between items-center 
+      <nav className="px-4 sm:px-6 md:px-8 h-14 sm:h-16 flex justify-between items-center 
         bg-gradient-to-r from-light/90 via-light/85 to-light/90 
         dark:from-dark/90 dark:via-dark/85 dark:to-dark/90 
         backdrop-blur-xl backdrop-saturate-200 
@@ -26,7 +26,7 @@ export default function NavBar() {
         hover:shadow-xl hover:shadow-black/[0.08] dark:hover:shadow-white/[0.05]
         hover:border-primary/20 dark:hover:border-primaryDark/20">
         
-        <ul className="flex space-x-6 text-sm font-medium">
+        <ul className="flex space-x-3 sm:space-x-4 md:space-x-6 text-xs sm:text-sm font-medium">
           <li>
             <Link
               href="/"
@@ -79,7 +79,7 @@ export default function NavBar() {
           </li>
         </ul>
 
-        <div className="flex space-x-4 items-center">
+        <div className="flex space-x-2 sm:space-x-3 md:space-x-4 items-center">
           <a 
             href="https://github.com/muhammadzain03" 
             target="_blank" 
@@ -87,7 +87,7 @@ export default function NavBar() {
             aria-label="View GitHub Profile"
             className="group relative p-2 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 hover:scale-110"
           >
-            <FiGithub className="h-5 w-5 text-dark/90 dark:text-light/90 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors" />
+            <FiGithub className="h-4 w-4 sm:h-5 sm:w-5 text-dark/90 dark:text-light/90 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors" />
           </a>
           <a 
             href="https://www.linkedin.com/in/muhammad-zain03/" 
@@ -96,14 +96,14 @@ export default function NavBar() {
             aria-label="View LinkedIn Profile"
             className="group relative p-2 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 hover:scale-110"
           >
-            <FaLinkedinIn className="h-5 w-5 text-dark/90 dark:text-light/90 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors" />
+            <FaLinkedinIn className="h-4 w-4 sm:h-5 sm:w-5 text-dark/90 dark:text-light/90 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors" />
           </a>
           <a 
             href="mailto:muhammad.zain1@ucalgary.ca"
             aria-label="Send Email"
             className="group relative p-2 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 hover:scale-110"
           >
-            <FiMail className="h-5 w-5 text-dark/90 dark:text-light/90 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors" />
+            <FiMail className="h-4 w-4 sm:h-5 sm:w-5 text-dark/90 dark:text-light/90 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors" />
           </a>
           <div className="pl-2">
             <ThemeSwitcher />
