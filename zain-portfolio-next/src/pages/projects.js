@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 import SEO from '@/components/SEO';
 import { useState, useCallback, useMemo, memo } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaPlay, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';
 
 // Project data
@@ -138,7 +138,6 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
                     className="absolute inset-0 flex items-center justify-center bg-black/15 hover:bg-black/10 transition-all duration-300"
                   >
                     <div className="w-12 h-12 bg-primary/95 dark:bg-primaryDark/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300">
-                      <FaPlay className="text-white text-sm ml-0.5" />
                     </div>
                   </motion.button>
                 )}
@@ -181,7 +180,6 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
                 aria-label={showVideo ? "Show image" : "Show video"}
                 className="absolute bottom-2 left-2 z-20 px-2 py-1 bg-dark/90 dark:bg-light/90 backdrop-blur-sm rounded-md flex items-center gap-1.5 text-light dark:text-dark text-xs font-medium shadow-lg hover:bg-dark dark:hover:bg-light transition-all duration-200"
               >
-                <FaPlay className="text-xs" />
                 <span>{showVideo ? 'Image' : 'Video'}</span>
               </button>
             )}

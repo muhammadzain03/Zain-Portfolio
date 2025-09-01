@@ -4,9 +4,8 @@
  */
 
 import Image from 'next/image';
-import { memo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ImageSkeleton } from './SkeletonLoader';
+import { memo } from 'react';
+import { useState } from 'react';
 
 const OptimizedImage = ({
   src,
