@@ -409,7 +409,7 @@ export default function Projects() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 max-w-3xl mx-auto leading-relaxed text-justify"
+                className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 max-w-3xl mx-auto leading-relaxed text-center"
               >
                 Explore my journey through code, creativity, and problem-solving. Each project represents a milestone in my development as a software engineer, showcasing diverse technologies and innovative solutions.
               </motion.p>
