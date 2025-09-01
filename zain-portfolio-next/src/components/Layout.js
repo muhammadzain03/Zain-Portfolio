@@ -1,12 +1,13 @@
 /**
  * Layout.js
- * Purpose: Page chrome — persistent NavBar, Footer, and viewport/meta.
- * Note: Per-page SEO is handled by the SEO component; Layout stays presentation-only.
+ * Purpose: Page chrome with mobile-optimized navigation and components.
+ * Note: Per-page SEO is handled by the SEO component; Layout includes mobile enhancements.
  */
 
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import LoadingIndicator from "./LoadingIndicator";
+import BottomNavigation from "./BottomNavigation";
 
 export default function Layout({ children }) {
   return (
@@ -15,8 +16,9 @@ export default function Layout({ children }) {
       <LoadingIndicator />
       <div className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light">
         <NavBar />
-        <main className="pt-14 sm:pt-16">{children}</main>
+        <main className="pt-14 sm:pt-16 pb-16 md:pb-0">{children}</main>
         <Footer />
+        <BottomNavigation />
       </div>
     </>
   );

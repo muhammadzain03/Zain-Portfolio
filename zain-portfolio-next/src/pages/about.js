@@ -6,9 +6,11 @@
 import Head from 'next/head';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { useRef } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { FaChess, FaFutbol } from 'react-icons/fa';
+import { FiRefreshCw } from 'react-icons/fi';
 import { BiMovie } from 'react-icons/bi';
+import usePullToRefresh from '@/hooks/usePullToRefresh';
 
 // Dynamically import heavy components
 const Contact = dynamic(() => import('@/components/Contact'), {
@@ -28,6 +30,13 @@ export default function About() {
   // Transform scroll progress to timeline height (optimized)
   const timelineHeight = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
+  // Pull to refresh functionality
+  const handleRefresh = useCallback(async () => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }, []);
+
+  const { isPulling, isRefreshing, pullDistance, pullProgress } = usePullToRefresh(handleRefresh);
+
   return (
     <>
       <SEO
@@ -44,6 +53,30 @@ export default function About() {
       </Head>
 
       <div ref={scrollRef} className="relative">
+        {/* Pull to Refresh Indicator */}
+        {(isPulling || isRefreshing) && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ 
+              opacity: isPulling ? pullProgress : 1, 
+              y: isPulling ? pullDistance * 0.3 : 0 
+            }}
+            className="fixed top-16 left-1/2 transform -translate-x-1/2 z-40 bg-primary/90 dark:bg-primaryDark/90 text-white px-4 py-2 rounded-full shadow-lg backdrop-blur-sm"
+          >
+            <div className="flex items-center space-x-2">
+              <motion.div
+                animate={{ rotate: isRefreshing ? 360 : 0 }}
+                transition={{ duration: 1, repeat: isRefreshing ? Infinity : 0, ease: "linear" }}
+              >
+                <FiRefreshCw className="h-4 w-4" />
+              </motion.div>
+              <span className="text-sm font-medium">
+                {isRefreshing ? 'Refreshing...' : pullProgress >= 1 ? 'Release to refresh' : 'Pull to refresh'}
+              </span>
+            </div>
+          </motion.div>
+        )}
+
       <main className="relative min-h-screen bg-light dark:bg-dark text-dark dark:text-light" role="main">
         {/* Hero Section */}
         <section className="pt-20 sm:pt-24 pb-6 sm:pb-8 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 2xl:px-48" aria-labelledby="about-heading">

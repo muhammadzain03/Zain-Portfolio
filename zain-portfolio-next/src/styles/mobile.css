@@ -1,0 +1,98 @@
+/**
+ * mobile.css
+ * Purpose: Mobile-specific optimizations and fixes
+ * Notes: Imported in globals.css, mobile-first approach
+ */
+
+/* Touch interaction improvements */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .hover\:scale-105:hover {
+    transform: none;
+  }
+  
+  /* Larger touch targets for mobile */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Safe area support for iOS devices */
+@supports(padding: max(0px)) {
+  .safe-area-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+}
+
+/* Mobile viewport fixes */
+@media screen and (max-width: 768px) {
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Improve text readability on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  /* Better focus states for mobile */
+  *:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  
+  /* Smooth scrolling for mobile */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Mobile navigation fixes */
+@media screen and (max-width: 767px) {
+  /* Ensure mobile menu doesn't cause horizontal scroll */
+  .mobile-menu {
+    max-width: calc(100vw - 2rem);
+  }
+  
+  /* Better mobile modal positioning */
+  .mobile-modal {
+    max-height: calc(100vh - 2rem);
+    max-width: calc(100vw - 2rem);
+  }
+}
+
+/* Improve mobile tap highlights */
+* {
+  -webkit-tap-highlight-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Mobile-specific animations */
+@media (prefers-reduced-motion: no-preference) and (max-width: 768px) {
+  /* Reduce motion intensity on mobile for better performance */
+  .motion-reduce-mobile * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Fix iOS Safari viewport height issues */
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Disable iOS Safari bounce effect where needed */
+  .no-bounce {
+    overscroll-behavior: contain;
+  }
+}

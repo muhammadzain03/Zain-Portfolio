@@ -8,8 +8,11 @@ import dynamic from 'next/dynamic';
 const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 import SEO from '@/components/SEO';
 import { useState, useCallback, useMemo, memo } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaPlay } from 'react-icons/fa';
+import { FiRefreshCw } from 'react-icons/fi';
 import Image from 'next/image';
+import useSwipeGestures from '@/hooks/useSwipeGestures';
+import usePullToRefresh from '@/hooks/usePullToRefresh';
 
 // Project data
 const projects = [
@@ -138,6 +141,7 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
                     className="absolute inset-0 flex items-center justify-center bg-black/15 hover:bg-black/10 transition-all duration-300"
                   >
                     <div className="w-12 h-12 bg-primary/95 dark:bg-primaryDark/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300">
+                      <FaPlay className="text-white text-sm ml-0.5" />
                     </div>
                   </motion.button>
                 )}
@@ -173,16 +177,7 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
               </motion.video>
             )}
 
-            {/* Video Toggle Button for Video Projects */}
-            {project.hasVideo && (
-              <button
-                onClick={onVideoToggle}
-                aria-label={showVideo ? "Show image" : "Show video"}
-                className="absolute bottom-2 left-2 z-20 px-2 py-1 bg-dark/90 dark:bg-light/90 backdrop-blur-sm rounded-md flex items-center gap-1.5 text-light dark:text-dark text-xs font-medium shadow-lg hover:bg-dark dark:hover:bg-light transition-all duration-200"
-              >
-                <span>{showVideo ? 'Image' : 'Video'}</span>
-              </button>
-            )}
+
           </div>
         </motion.div>
       </motion.div>
@@ -343,6 +338,31 @@ export default function Projects() {
   const [modalProject, setModalProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+
+  // Pull to refresh functionality
+  const handleRefresh = useCallback(async () => {
+    // Simulate refresh delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    // In a real app, you'd refetch data here
+  }, []);
+
+  const { isPulling, isRefreshing, pullDistance, pullProgress } = usePullToRefresh(handleRefresh);
+
+  // Swipe gestures for mobile navigation
+  const handleSwipeLeft = useCallback(() => {
+    if (currentProjectIndex < projects.length - 1) {
+      setCurrentProjectIndex(prev => prev + 1);
+    }
+  }, [currentProjectIndex]);
+
+  const handleSwipeRight = useCallback(() => {
+    if (currentProjectIndex > 0) {
+      setCurrentProjectIndex(prev => prev - 1);
+    }
+  }, [currentProjectIndex]);
+
+  const swipeGestures = useSwipeGestures(handleSwipeLeft, handleSwipeRight);
 
   const handleCardClick = useCallback((project) => {
     setModalProject(project);
@@ -377,7 +397,31 @@ export default function Projects() {
           <meta name="robots" content="index,follow" />
         </Head>
 
-      <main className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light">
+      <main className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light" {...swipeGestures}>
+        {/* Pull to Refresh Indicator */}
+        {(isPulling || isRefreshing) && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ 
+              opacity: isPulling ? pullProgress : 1, 
+              y: isPulling ? pullDistance * 0.3 : 0 
+            }}
+            className="fixed top-16 left-1/2 transform -translate-x-1/2 z-40 bg-primary/90 dark:bg-primaryDark/90 text-white px-4 py-2 rounded-full shadow-lg backdrop-blur-sm"
+          >
+            <div className="flex items-center space-x-2">
+              <motion.div
+                animate={{ rotate: isRefreshing ? 360 : 0 }}
+                transition={{ duration: 1, repeat: isRefreshing ? Infinity : 0, ease: "linear" }}
+              >
+                <FiRefreshCw className="h-4 w-4" />
+              </motion.div>
+              <span className="text-sm font-medium">
+                {isRefreshing ? 'Refreshing...' : pullProgress >= 1 ? 'Release to refresh' : 'Pull to refresh'}
+              </span>
+            </div>
+          </motion.div>
+        )}
+
         {/* Hero Section */}
         <section className="pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 2xl:px-48">
           <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto">
@@ -413,12 +457,12 @@ export default function Projects() {
               </motion.p>
             </motion.div>
 
-            {/* Projects Grid */}
+            {/* Projects Grid - Desktop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
+              className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
             >
               {memoizedProjects.map((project, index) => (
                 <div key={project.id} className={index === memoizedProjects.length - 1 && memoizedProjects.length % 2 === 1 ? "lg:col-span-2 lg:flex lg:justify-center" : ""}>
@@ -432,6 +476,52 @@ export default function Projects() {
                 </div>
               ))}
             </motion.div>
+
+            {/* Mobile Projects Carousel */}
+            <div className="md:hidden mb-16">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="overflow-hidden"
+              >
+                <motion.div
+                  className="flex transition-transform duration-300 ease-out"
+                  style={{ transform: `translateX(-${currentProjectIndex * 100}%)` }}
+                >
+                  {memoizedProjects.map((project, index) => (
+                    <div key={project.id} className="w-full flex-shrink-0 px-4">
+                      <ProjectCard 
+                        project={project} 
+                        index={index} 
+                        onCardClick={handleCardClick}
+                      />
+                    </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+
+              {/* Mobile Navigation Dots */}
+              <div className="flex justify-center mt-6 space-x-2">
+                {memoizedProjects.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentProjectIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                      index === currentProjectIndex 
+                        ? 'bg-primary dark:bg-primaryDark w-6' 
+                        : 'bg-dark/20 dark:bg-light/20'
+                    }`}
+                    aria-label={`Go to project ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Swipe Instruction */}
+              <p className="text-center text-xs text-dark/50 dark:text-light/50 mt-4">
+                Swipe left or right to navigate projects
+              </p>
+            </div>
 
             {/* GitHub Profile Link */}
             <motion.div
