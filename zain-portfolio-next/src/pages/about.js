@@ -46,8 +46,8 @@ export default function About() {
       <div ref={scrollRef} className="relative">
       <main className="relative min-h-screen bg-light dark:bg-dark text-dark dark:text-light" role="main">
         {/* Hero Section */}
-        <section className="pt-24 pb-8 px-4 md:px-8 lg:px-16 xl:px-32" aria-labelledby="about-heading">
-          <div className="max-w-7xl mx-auto">
+        <section className="pt-20 sm:pt-24 pb-6 sm:pb-8 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 2xl:px-48" aria-labelledby="about-heading">
+          <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -59,7 +59,7 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-2xl md:text-3xl font-medium text-dark dark:text-light mb-4"
+                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-medium text-dark dark:text-light mb-3 sm:mb-4"
                 tabIndex={0}
                 role="heading"
                 aria-level="1"
@@ -70,7 +70,7 @@ export default function About() {
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="w-24 h-[2px] bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary mx-auto mb-8"
+                className="w-20 sm:w-24 md:w-28 h-[2px] bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary mx-auto mb-8"
               />
             </motion.div>
 
@@ -80,10 +80,10 @@ export default function About() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="max-w-4xl mx-auto text-center space-y-6"
             >
-              <p className="text-xs md:text-sm text-dark/90 dark:text-light/90 leading-relaxed">
+              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/90 dark:text-light/90 leading-relaxed text-justify">
                 Hi, I'm Muhammad Zain—a third-year Software Engineering student at the University of Calgary with a passion for building meaningful technology. My journey from Karachi to Calgary has shaped my adaptability, drive, and growth mindset. I'm energized by solving real-world problems, collaborating on diverse teams, and always learning something new.
               </p>
-              <p className="text-xs md:text-sm text-dark/80 dark:text-light/80 leading-relaxed">
+              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 leading-relaxed text-justify">
                 I thrive in feedback-driven environments and value building software that is scalable, clean, and impactful. I see every challenge as an opportunity for growth—whether that's debugging a complex system, optimizing a database query, or learning a new stack. My experience spans academic projects, freelance work, and continuous self-driven learning.
               </p>
             </motion.div>
@@ -92,7 +92,7 @@ export default function About() {
 
         {/* Timeline Section */}
         <section className="py-8 px-4 md:px-8 lg:px-16 xl:px-32 relative">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto">
             {/* Section Header */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -365,7 +365,7 @@ function WorkValuesSection() {
               className="flex items-start space-x-3 p-4 rounded-xl hover:bg-light/50 dark:hover:bg-dark/50 transition-colors duration-200"
             >
               <div className="w-2 h-2 bg-primary dark:bg-primaryDark rounded-full mt-2 flex-shrink-0"></div>
-              <p className="text-xs md:text-sm text-dark/80 dark:text-light/80 leading-relaxed">{value}</p>
+              <p className="text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl text-dark/80 dark:text-light/80 leading-relaxed text-justify">{value}</p>
             </motion.div>
           ))}
         </div>

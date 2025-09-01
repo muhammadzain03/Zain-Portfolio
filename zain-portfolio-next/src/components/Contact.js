@@ -37,9 +37,9 @@ const Contact = () => {
 
   return (
     // Fixed launcher for the contact modal
-    <div className="fixed left-4 bottom-4 flex items-end gap-4 z-50">
+    <div className="fixed left-2 sm:left-4 bottom-2 sm:bottom-4 flex items-end gap-2 sm:gap-4 z-50">
       <button 
-        className="w-32 h-32 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 relative group contact-button"
+        className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 relative group contact-button"
         onClick={() => setIsChatOpen(true)}
         aria-label="Open contact chat"
         role="button"
