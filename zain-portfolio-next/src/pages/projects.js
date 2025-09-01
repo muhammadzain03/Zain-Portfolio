@@ -8,8 +8,9 @@ import dynamic from 'next/dynamic';
 const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 import SEO from '@/components/SEO';
 import { useState, useCallback, useMemo, memo } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaPlay, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';
+import { hoverAnimations } from '@/utils/animations';
 
 // Project data
 const projects = [
@@ -138,7 +139,6 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
                     className="absolute inset-0 flex items-center justify-center bg-black/15 hover:bg-black/10 transition-all duration-300"
                   >
                     <div className="w-12 h-12 bg-primary/95 dark:bg-primaryDark/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300">
-                      <FaPlay className="text-white text-sm ml-0.5" />
                     </div>
                   </motion.button>
                 )}
@@ -181,7 +181,6 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
                 aria-label={showVideo ? "Show image" : "Show video"}
                 className="absolute bottom-2 left-2 z-20 px-2 py-1 bg-dark/90 dark:bg-light/90 backdrop-blur-sm rounded-md flex items-center gap-1.5 text-light dark:text-dark text-xs font-medium shadow-lg hover:bg-dark dark:hover:bg-light transition-all duration-200"
               >
-                <FaPlay className="text-xs" />
                 <span>{showVideo ? 'Image' : 'Video'}</span>
               </button>
             )}
@@ -204,8 +203,8 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: index * 0.2 }}
       viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -10 }}
-      className="group relative bg-gradient-to-br from-light/60 via-light/50 to-light/60 dark:from-dark/60 dark:via-dark/50 dark:to-dark/60 backdrop-blur-sm rounded-2xl border border-primary/20 dark:border-primaryDark/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+      {...hoverAnimations.projectCard}
+      className="group relative glass-card rounded-2xl border-primary-glow shadow-glow transition-all duration-500 overflow-hidden cursor-pointer"
       style={{ transform: 'translateZ(0)' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -326,8 +325,7 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: index * 0.2 + 0.7 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          {...hoverAnimations.subtle}
           className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300"
         >
           <FaGithub />

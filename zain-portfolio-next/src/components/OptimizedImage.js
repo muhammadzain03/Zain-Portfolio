@@ -6,6 +6,8 @@
 import Image from 'next/image';
 import { memo } from 'react';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ImageSkeleton } from './SkeletonLoader';
 
 const OptimizedImage = ({
   src,
@@ -50,34 +52,49 @@ const OptimizedImage = ({
     <div 
       className={`relative overflow-hidden ${className}`}
     >
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        priority={priority}
-        quality={quality}
-        placeholder={placeholder}
-        blurDataURL={blurDataURL}
-        sizes={sizes}
-        className={
-          priority
-            ? ''
-            : `transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`
-        }
-        onLoad={handleLoad}
-        onError={handleError}
-        style={{
-          objectFit: 'cover',
-          objectPosition: 'center',
+      {/* Sophisticated skeleton loader */}
+      <AnimatePresence>
+        {!priority && isLoading && (
+          <ImageSkeleton 
+            width="100%" 
+            height="100%" 
+            className="absolute inset-0"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Main image with enhanced transitions */}
+      <motion.div
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ 
+          opacity: isLoading ? 0 : 1,
+          scale: isLoading ? 1.05 : 1
         }}
-        {...props}
-      />
-      
-      {/* Loading placeholder */}
-      {!priority && isLoading && (
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primaryDark/10 animate-pulse" />
-      )}
+        transition={{ 
+          duration: 0.6,
+          ease: [0.6, -0.05, 0.01, 0.99]
+        }}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          priority={priority}
+          quality={quality}
+          placeholder={placeholder}
+          blurDataURL={blurDataURL}
+          sizes={sizes}
+          className="transition-transform duration-700 hover:scale-105"
+          onLoad={handleLoad}
+          onError={handleError}
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center',
+          }}
+          {...props}
+        />
+      </motion.div>
     </div>
   );
 };

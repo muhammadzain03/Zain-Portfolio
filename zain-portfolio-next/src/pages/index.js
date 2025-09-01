@@ -10,9 +10,19 @@ import dynamic from 'next/dynamic';
 const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 import SEO from '@/components/SEO';
 import profilePic from "../../public/images/profile/zain.webp";
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function Home() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
   const recentProjects = [
     "Real-time systems",
     "Full-stack web development",
@@ -33,7 +43,16 @@ export default function Home() {
         <meta name="application-name" content="Muhammad Zain Portfolio" />
       </Head>
 
-      <main className="flex flex-col w-full min-h-screen bg-light dark:bg-dark hero-section">
+      <main ref={containerRef} className="flex flex-col w-full min-h-screen bg-light dark:bg-dark hero-section relative overflow-hidden">
+        {/* Subtle parallax background elements */}
+        <motion.div 
+          style={{ y: backgroundY }}
+          className="fixed inset-0 opacity-[0.02] dark:opacity-[0.04] pointer-events-none z-0"
+        >
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-primaryDark/30 rounded-full blur-3xl" />
+          <div className="absolute top-3/4 left-3/4 w-48 h-48 bg-primary/20 rounded-full blur-2xl" />
+        </motion.div>
         {/* Initials Badge */}
         <div className="w-full flex justify-center mt-4 sm:mt-6 md:mt-8">
           <motion.div
@@ -139,10 +158,16 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 2xl:gap-20 items-start">
               {/* Left Column - Main Introduction */}
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="lg:col-span-6 space-y-3 sm:space-y-4 lg:space-y-6 xl:space-y-8 2xl:space-y-10"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.2,
+                  ease: [0.6, -0.05, 0.01, 0.99]
+                }}
+                style={{ y: textY }}
+                className="lg:col-span-6 space-y-3 sm:space-y-4 lg:space-y-6 xl:space-y-8 2xl:space-y-10 relative z-10"
               >
                 {/* Opening Statement */}
                 <div className="space-y-2">
