@@ -51,7 +51,7 @@ export default function NavBar() {
 
   const socialLinks = [
     { href: 'https://github.com/muhammadzain03', icon: FiGithub, label: 'GitHub' },
-    { href: 'https://www.linkedin.com/in/muhammad-zain03/', icon: FaLinkedinIn, label: 'LinkedIn' },
+    { href: 'https://www.linkedin.com/in/muhammadzain03/', icon: FaLinkedinIn, label: 'LinkedIn' },
     { href: 'mailto:muhammad.zain1@ucalgary.ca', icon: FiMail, label: 'Email' }
   ];
 

@@ -78,7 +78,7 @@ export default function Document() {
               "image": "/images/profile/zain.webp",
               "sameAs": [
                 "https://github.com/muhammadzain03",
-                "https://linkedin.com/in/muhammad-zain03"
+                "https://linkedin.com/in/muhammadzain03"
               ],
               "alumniOf": {
                 "@type": "EducationalOrganization",

@@ -60,7 +60,7 @@ export default function MobileContact({ isOpen, onClose }) {
       icon: FaLinkedinIn,
       label: 'LinkedIn',
       value: '/muhammad-zain03',
-      action: () => window.open('https://www.linkedin.com/in/muhammad-zain03/', '_blank')
+      action: () => window.open('https://www.linkedin.com/in/muhammadzain03/', '_blank')
     },
     {
       icon: FaGithub,
