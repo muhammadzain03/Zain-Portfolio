@@ -26,7 +26,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Muhammad Zain. All rights reserved.
           </p>
           <p className="text-sm font-medium text-dark/90 dark:text-light/90 text-center mt-1">
-            Built with Next.js - Tailwind CSS & Cursor AI
+            Built with Next.js - Tailwind CSS & Framer Motion
           </p>
         </div>
       </footer>
