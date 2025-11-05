@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { FiGithub, FiMail, FiMenu, FiX } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeSwitcher from "./ThemeSwitcher";
 
@@ -45,13 +46,13 @@ export default function NavBar() {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/projects', label: 'Projects' },
-    { href: '/resume', label: 'Resume' },
-    { href: '/leetcode', label: 'LeetCode' }
+    { href: '/resume', label: 'Resume' }
   ];
 
   const socialLinks = [
     { href: 'https://github.com/muhammadzain03', icon: FiGithub, label: 'GitHub' },
     { href: 'https://www.linkedin.com/in/muhammadzain03/', icon: FaLinkedinIn, label: 'LinkedIn' },
+    { href: 'https://leetcode.com/u/muhammadzain03/', icon: SiLeetcode, label: 'LeetCode' },
     { href: 'mailto:muhammad.zain1@ucalgary.ca', icon: FiMail, label: 'Email' }
   ];
 
