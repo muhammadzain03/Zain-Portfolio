@@ -117,7 +117,7 @@ export default function About() {
                 Hi, I&apos;m Muhammad Zain - a third-year Software Engineering student at the University of Calgary with a passion for building meaningful technology. My journey from Karachi to Calgary has shaped my adaptability, drive, and growth mindset. I&apos;m energized by solving real-world problems, collaborating on diverse teams, and always learning something new.
               </p>
               <p className="text-xs md:text-sm text-dark/80 dark:text-light/80 leading-relaxed text-center">
-                I thrive in feedback-driven environments and value building software that is scalable, clean, and impactful. I see every challenge as an opportunity for growth—whether that&apos;s debugging a complex system, optimizing a database query, or learning a new stack. My experience spans academic projects, freelance work, and continuous self-driven learning.
+                I thrive in feedback-driven environments and value building software that is scalable, clean, and impactful. I see every challenge as an opportunity for growth - whether that&apos;s debugging a complex system, optimizing a database query, or learning a new stack. My experience spans academic projects, freelance work, and continuous self-driven learning.
               </p>
             </motion.div>
           </div>
@@ -365,9 +365,9 @@ function WorkValuesSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const values = [
-    "Collaborative team member—believe in honest feedback and shared success.",
+    "Collaborative team member - believe in honest feedback and shared success.",
     "Clear, concise communicator (written and verbal).",
-    "Curious and resourceful—love picking up new frameworks and tools quickly.",
+    "Curious and resourceful - love picking up new frameworks and tools quickly.",
     "Prioritize maintainable, well-documented code and test coverage.",
     "Love to break down complex problems into actionable steps and ship real value.",
     "Thrive under deadlines and enjoy taking initiative in ambiguous situations."
