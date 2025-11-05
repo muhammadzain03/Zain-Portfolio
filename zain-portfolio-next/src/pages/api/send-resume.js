@@ -110,7 +110,7 @@ export default async function handler(req, res) {
               <p><strong>Connect with me:</strong></p>
               <ul>
                 <li>Email: <a href="mailto:muhammadzain0476@gmail.com">muhammadzain0476@gmail.com</a></li>
-                <li>Portfolio: <a href="https://your-portfolio-url.com">View my work</a></li>
+                <li>Portfolio: <a href="https://muhammadzain.app/">View my work</a></li>
               </ul>
             </div>
             <div class="footer">
@@ -128,8 +128,8 @@ Thank you for your interest in my profile! I've attached my resume to this email
 I'm a Software Engineering student at the University of Calgary with a passion for building innovative solutions. Feel free to reach out if you'd like to discuss potential opportunities or collaborations.
 
 Connect with me:
-- Email: muhammadzain0476@gmail.com
-- Portfolio: https://your-portfolio-url.com
+- Email: muhammad.zain1@ucalgary.ca
+- Portfolio: https://muhammadzain.app/
 
 Best regards,
 Muhammad Zain
