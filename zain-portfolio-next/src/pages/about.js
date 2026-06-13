@@ -1,6 +1,6 @@
 /**
  * pages/about.js
- * Purpose: About page — story, skills timeline, interests; rich motion.
+ * Purpose: About page - story, skills timeline, interests; rich motion.
  */
 
 import Head from 'next/head';

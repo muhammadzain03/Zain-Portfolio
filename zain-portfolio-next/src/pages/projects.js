@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 import SEO from '@/components/SEO';
 import { useState, useCallback, useMemo, memo } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaTimes, FaPlay } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaPlay, FaFilePdf } from 'react-icons/fa';
 import { FiRefreshCw } from 'react-icons/fi';
 import Image from 'next/image';
 import useSwipeGestures from '@/hooks/useSwipeGestures';
@@ -17,10 +17,22 @@ import usePullToRefresh from '@/hooks/usePullToRefresh';
 // Project data
 const projects = [
   {
+    id: 6,
+    title: "Lumen Pendulum",
+    category: "Physics Simulation",
+    description: "A real-time, interactive triple pendulum simulation that visualizes deterministic chaos through glowing motion trails. The physics are derived from Lagrangian mechanics and integrated with 4th-order Runge-Kutta (RK4). Visuals are rendered with Three.js and a bloom post-processing pass. Fully interactive - grab any mass and the chain responds through inverse kinematics above and free gravity below.",
+    image: "/images/projects/Lumen Pendulum.jpg",
+    github: "https://github.com/muhammadzain03/Lumen-Pendulum",
+    liveDemo: "https://muhammadzain03.github.io/Lumen-Pendulum/",
+    pdf: "/Lagrange.pdf",
+    technologies: ["TypeScript", "Three.js", "Vite", "Lagrangian Mechanics", "RK4", "GitHub Actions"],
+    hasVideo: false
+  },
+  {
     id: 1,
     title: "CityX Subway Display System",
     category: "Real-Time Information Display",
-    description: "A sophisticated Java-based subway information display system delivering real-time train tracking, weather updates, news feeds, and dynamic advertisements—mirroring the polish and reliability of major metro networks. Built with enterprise-level MVC architecture, multithreading, and API integrations for seamless live updates and smooth UI animations.",
+    description: "A sophisticated Java-based subway information display system delivering real-time train tracking, weather updates, news feeds, and dynamic advertisements - mirroring the polish and reliability of major metro networks. Built with enterprise-level MVC architecture, multithreading, and API integrations for seamless live updates and smooth UI animations.",
     image: "/images/projects/Subway Screen Application.webp",
     video: "/images/projects/Subway Screen Application Video.mp4",
     github: "https://github.com/muhammadzain03/CityX-Subway-Display-System",
@@ -53,7 +65,7 @@ const projects = [
     id: 4,
     title: "Purrfect Innovations",
     category: "Frontend E-commerce Website",
-    description: "A clean, static e-commerce website for cat enthusiasts, crafted using HTML and CSS to highlight best practices in responsive web design. Showcases a simple product catalog, user-friendly navigation, and polished layouts—all demonstrating frontend fundamentals and attention to accessibility.",
+    description: "A clean, static e-commerce website for cat enthusiasts, crafted using HTML and CSS to highlight best practices in responsive web design. Showcases a simple product catalog, user-friendly navigation, and polished layouts - all demonstrating frontend fundamentals and attention to accessibility.",
     image: "/images/projects/Purrfect Innovations.webp",
     github: "https://github.com/muhammadzain03/Purrfect-Innovations",
     technologies: ["HTML", "CSS", "Responsive Design", "UI/UX"],
@@ -198,7 +210,7 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
       transition={{ duration: 0.8, delay: index * 0.2 }}
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -10 }}
-      className="group relative bg-gradient-to-br from-light/60 via-light/50 to-light/60 dark:from-dark/60 dark:via-dark/50 dark:to-dark/60 backdrop-blur-sm rounded-2xl border border-primary/20 dark:border-primaryDark/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+      className="group relative flex flex-col h-full bg-gradient-to-br from-light/60 via-light/50 to-light/60 dark:from-dark/60 dark:via-dark/50 dark:to-dark/60 backdrop-blur-sm rounded-2xl border border-primary/20 dark:border-primaryDark/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
       style={{ transform: 'translateZ(0)' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -274,7 +286,7 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
       </div>
 
       {/* Project Content */}
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-1">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -298,7 +310,7 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: index * 0.2 + 0.6 }}
-          className="flex flex-wrap gap-2 mb-6"
+          className="flex flex-wrap gap-2 mb-6 mt-auto"
         >
           {project.technologies.map((tech, techIndex) => (
             <span
@@ -310,23 +322,55 @@ const ProjectCard = memo(({ project, index, onCardClick }) => {
           ))}
         </motion.div>
 
-        {/* GitHub Link */}
-        <motion.a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`View ${project.title} on GitHub`}
+        {/* Project Links */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: index * 0.2 + 0.7 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300"
+          className="flex flex-wrap items-center gap-3"
         >
-          <FaGithub />
-          <span>View on GitHub</span>
-          <FaExternalLinkAlt className="text-xs" />
-        </motion.a>
+          {project.liveDemo && (
+            <motion.a
+              href={project.liveDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${project.title} live demo`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300"
+            >
+              <FaExternalLinkAlt className="text-xs" />
+              <span>View Live</span>
+            </motion.a>
+          )}
+          <motion.a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${project.title} on GitHub`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300"
+          >
+            <FaGithub />
+            <span>View on GitHub</span>
+            <FaExternalLinkAlt className="text-xs" />
+          </motion.a>
+          {project.pdf && (
+            <motion.a
+              href={project.pdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${project.title} reference PDF`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-dark/80 to-dark/60 dark:from-light/20 dark:to-light/10 text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300 border border-primary/20 dark:border-primaryDark/20"
+            >
+              <FaFilePdf />
+              <span>Lagrange PDF</span>
+            </motion.a>
+          )}
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -465,8 +509,8 @@ export default function Projects() {
               className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
             >
               {memoizedProjects.map((project, index) => (
-                <div key={project.id} className={index === memoizedProjects.length - 1 && memoizedProjects.length % 2 === 1 ? "lg:col-span-2 lg:flex lg:justify-center" : ""}>
-                  <div className={index === memoizedProjects.length - 1 && memoizedProjects.length % 2 === 1 ? "lg:w-full lg:max-w-lg" : ""}>
+                <div key={project.id} className={`h-full ${index === memoizedProjects.length - 1 && memoizedProjects.length % 2 === 1 ? "lg:col-span-2 lg:flex lg:justify-center" : ""}`}>
+                  <div className={`h-full ${index === memoizedProjects.length - 1 && memoizedProjects.length % 2 === 1 ? "lg:w-full lg:max-w-lg" : ""}`}>
                     <ProjectCard 
                       project={project} 
                       index={index} 

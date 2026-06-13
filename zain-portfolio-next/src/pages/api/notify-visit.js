@@ -64,7 +64,7 @@ Time: ${new Date().toISOString()}`,
       text,
     });
   } catch (_) {
-    // Silent fail — never affect user experience
+    // Silent fail - never affect user experience
   }
 }
 
