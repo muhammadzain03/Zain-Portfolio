@@ -1,6 +1,6 @@
 /**
  * pages/index.js
- * Purpose: Landing page — hero, intro, and profile image with motion.
+ * Purpose: Landing page - hero, intro, and profile image with motion.
  */
 
 import Head from 'next/head';
@@ -216,7 +216,7 @@ export default function Home() {
                   className="space-y-1.5"
                 >
                   <p className="text-xs md:text-sm text-dark/75 dark:text-light/75 text-justify">This site is a glimpse into what I create when curiosity meets code.</p>
-                  <p className="text-xs md:text-sm text-dark dark:text-light font-medium text-justify">Go ahead — explore the things I&apos;ve built, solved, and learned along the way.</p>
+                  <p className="text-xs md:text-sm text-dark dark:text-light font-medium text-justify">Go ahead - explore the things I&apos;ve built, solved, and learned along the way.</p>
                 </motion.div>
               </motion.div>
 

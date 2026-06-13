@@ -1,6 +1,6 @@
 /**
  * pages/_app.js
- * Purpose: App wrapper — theme provider, global styles, layout, route animations.
+ * Purpose: App wrapper - theme provider, global styles, layout, route animations.
  */
 
 import Layout from "@/components/Layout";
