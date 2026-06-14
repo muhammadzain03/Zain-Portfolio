@@ -1,5 +1,5 @@
 <!--
-Masterclass README for Muhammad Zain – Portfolio
+Muhammad Zain – Software Engineering Portfolio
 -->
 
 <a name="muhammad-zain-portfolio"></a>
@@ -14,13 +14,15 @@ Masterclass README for Muhammad Zain – Portfolio
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 ![Node](https://img.shields.io/badge/Node-18%2B-339933)
 
-<em><small>A modern, fast, and accessible portfolio built with Next.js and Tailwind CSS.</small></em>
+<em><small>A production-ready portfolio built with Next.js and Tailwind CSS, focused on performance, accessibility, and maintainability.</small></em>
+
+**Live site:** [muhammadzain.app](https://muhammadzain.app/)
 
 </div>
 
 ---
 
-### 📋 Table of Contents
+### Table of Contents
 - [Project Overview](#project-overview)
 - [Features & Highlights](#features-and-highlights)
 - [Tech Stack](#tech-stack)
@@ -35,44 +37,44 @@ Masterclass README for Muhammad Zain – Portfolio
 ---
 
 <a name="project-overview"></a>
-### 🚀 Project Overview
+### Project Overview
 
-<small>This is my personal portfolio showcasing my background as a Software Engineering student at the University of Calgary, along with a curated selection of projects and interests. The site demonstrates modern web development practices with a focus on performance, accessibility, and user experience.</small>
+<small>Personal portfolio for Muhammad Zain, Software Engineering student at the University of Calgary. The site presents professional background, selected projects, and technical interests, with an emphasis on performance, accessibility, and user experience. Deployed at [muhammadzain.app](https://muhammadzain.app/).</small>
 
 <a name="features-and-highlights"></a>
-### ✨ Features & Highlights
+### Features & Highlights
 
 #### Core Features
-- **Multi-page portfolio** with dedicated sections for projects, resume, and about information
-- **Interactive project showcase** with modal image/video previews and detailed descriptions
+- **Multi-page portfolio** with dedicated sections for home, about, projects, resume, and LeetCode
+- **Interactive project showcase** with modal image and video previews, live demo links for deployed projects, PDF references, and detailed descriptions
 - **Embedded resume viewer** with PDF display and download functionality
-- **Contact system** with floating launcher and quick-copy actions for email/social links
-- **Theme switching** with dark/light mode support and system preference detection
+- **Contact system** with floating launcher and quick-copy actions for email and social links
+- **Theme switching** with dark and light mode support and system preference detection
 
 #### User Experience
-- **Fully responsive design** optimized for mobile → tablet → desktop viewports
-- **Smooth animations** using framer-motion with GPU-friendly transforms and opacity changes
+- **Fully responsive design** optimized for mobile, tablet, and desktop viewports
+- **Smooth animations** using Framer Motion with GPU-friendly transforms and opacity changes
 - **Zero layout shift (CLS)** through proper image sizing and skeleton loading states
-- **Instant navigation** via idle-time route prefetching with custom `usePrefetch` hook
-- **Accessibility-first** with semantic HTML, proper ARIA labels, and keyboard navigation
+- **Instant navigation** via idle-time route prefetching with a custom `usePrefetch` hook
+- **Accessibility-first** implementation with semantic HTML, ARIA labels, and keyboard navigation
 
 #### Technical Implementation
 - **SEO optimization** with per-page meta tags, Open Graph, Twitter cards, and structured data (JSON-LD)
 - **Performance monitoring** using Web Vitals with silent metrics collection
 - **Security headers** including strict CSP, HSTS, and content type validation
-- **Image optimization** via Next.js Image component with custom wrapper for consistent sizing
+- **Image optimization** via the Next.js Image component with a custom wrapper for consistent sizing
 - **Code splitting** with dynamic imports for secondary UI components to reduce initial bundle size
 
 <a name="tech-stack"></a>
-### 🧰 Tech Stack
+### Tech Stack
 
 #### Framework & Core
-- **Next.js 15** (Pages Router) - React framework with SSG/SSR capabilities
+- **Next.js 15** (Pages Router) - React framework with SSG and SSR capabilities
 - **React 18** - UI library with concurrent features
 - **Tailwind CSS 3.x** - Utility-first CSS framework with custom theme configuration
 
 #### Libraries & Tools
-- **framer-motion** - Animation library for smooth, performant transitions
+- **Framer Motion** - Animation library for smooth, performant transitions
 - **next-themes** - Theme management with system preference detection
 - **react-icons** - Icon library with consistent styling
 - **web-vitals** - Performance metrics collection for Core Web Vitals
@@ -83,7 +85,7 @@ Masterclass README for Muhammad Zain – Portfolio
 - **Vercel** - Deployment platform with automatic builds
 
 <a name="architecture"></a>
-### 🏗 Architecture
+### Architecture
 
 ```
 Zain Portfolio/
@@ -91,29 +93,41 @@ Zain Portfolio/
   LICENSE
   zain-portfolio-next/
     public/                      # Static assets
-      images/                    # Optimized images (WebP format)
+      images/
+        projects/                # Project preview images
       Muhammad-Zain-Resume.pdf   # Resume file
+      Lagrange.pdf               # Lumen Pendulum physics reference
       manifest.json              # PWA manifest
     src/
       components/                # Reusable UI components
         SEO.js                   # Per-page SEO management
         OptimizedImage.js        # Image wrapper with loading states
         ThemeSwitcher.js         # Dark/light theme toggle
+        NavBar.js                # Desktop navigation
+        BottomNavigation.js      # Mobile navigation
         ContactChat.js           # Floating contact launcher
+        ResumeRequestForm.js     # Resume request form
       hooks/                     # Custom React hooks
         usePrefetch.js           # Route prefetching logic
         useSwipeGestures.js      # Mobile gesture handling
+        usePullToRefresh.js      # Pull-to-refresh on mobile
       pages/                     # Next.js pages and API routes
-        api/notify-visit.js      # Analytics endpoint
+        index.js                 # Home
+        about.js                 # About
+        projects.js              # Projects showcase
+        resume.js                # Resume viewer
+        leetcode.js              # LeetCode profile
+        api/notify-visit.js      # Visit notification endpoint
+        api/send-resume.js       # Resume request endpoint
       styles/                    # Global styles and responsive design
     next.config.mjs              # Next.js configuration with security headers
     tailwind.config.js           # Tailwind theme and component configuration
 ```
 
 <a name="performance-and-optimization"></a>
-### ⚡ Performance & Optimization
+### Performance & Optimization
 
-<small>You can see the portfolio in action on the live site. The production build achieves perfect optimization scores:</small>
+<small>The production deployment at [muhammadzain.app](https://muhammadzain.app/) maintains strong Lighthouse scores across all categories.</small>
 
 #### Lighthouse Results (Production)
 - **Performance: 100/100** - Optimized LCP, FID, and CLS metrics
@@ -121,7 +135,7 @@ Zain Portfolio/
 - **Best Practices: 100/100** - Security headers, HTTPS, and modern standards
 - **SEO: 100/100** - Complete meta tags, structured data, and crawlability
 
-![Lighthouse score (production)](Lighthouse-score.png)
+<small>Scores verified on the production deployment at [muhammadzain.app](https://muhammadzain.app/).</small>
 
 #### Optimization Techniques
 - **LCP optimization** - Hero images use `priority` loading and avoid fade-in animations
@@ -132,9 +146,9 @@ Zain Portfolio/
 - **Bundle analysis** - Tree shaking eliminates unused code in production builds
 
 <a name="deployment-and-production"></a>
-### 🚢 Deployment & Production
+### Deployment & Production
 
-<small>**Platform:** Vercel with automatic deployments from the main branch</small>
+<small>**Platform:** Vercel with automatic deployments from the `main` branch · **Live URL:** [muhammadzain.app](https://muhammadzain.app/)</small>
 
 <small>**Build Process:**
 - Development builds include HMR, React refresh, and debugging tools
@@ -148,9 +162,9 @@ Zain Portfolio/
 - Error tracking and performance regression detection</small>
 
 <a name="development-process"></a>
-### 🛤 Development Process
+### Development Process
 
-<small>Building this portfolio involved multiple iterations focused on achieving production-quality performance while maintaining clean, maintainable code.</small>
+<small>The portfolio was developed iteratively with a focus on production-quality performance, accessibility, and maintainable code.</small>
 
 #### Development Approach
 - **Performance-first design** - Every feature evaluated for impact on Core Web Vitals
@@ -171,25 +185,26 @@ Zain Portfolio/
 - Accessibility testing with screen readers and keyboard navigation
 
 <a name="contributing"></a>
-### 🤝 Contributing
+### Contributing
 
-<small>This is a personal portfolio project, but I'm always open to suggestions and improvements. Feel free to open an issue or reach out if you notice something that could be enhanced.</small>
+<small>This is a personal portfolio project. Suggestions and improvements are welcome via issues or direct contact.</small>
 
 <a name="license"></a>
-### 📄 License
+### License
 
-<small>MIT License © 2025 Muhammad Zain</small>
+<small>MIT License © 2026 Muhammad Zain</small>
 
 <a name="contact"></a>
-### 📞 Contact
+### Contact
 
 - **Project Maintainer:** Muhammad Zain
+- **Website:** [muhammadzain.app](https://muhammadzain.app/)
 - **Email:** muhammadzain0476@gmail.com
 
 <div align="center">
 
-<small>Made with passion using Next.js, Tailwind CSS, and thoughtful attention to detail</small>
+<small>Built with Next.js, Tailwind CSS, and Framer Motion.</small>
 
-[⬆ Back to Top](#muhammad-zain-portfolio)
+[Back to Top](#muhammad-zain-portfolio)
 
 </div>
