@@ -214,13 +214,17 @@ Time: ${new Date().toISOString()}
       message: 'Resume sent successfully! Please check your email.',
     });
   } catch (error) {
-    console.error('Error sending resume:', error?.message || error);
+    console.error('Error sending resume:', {
+      message: error?.message,
+      code: error?.code,
+    });
+
+    const isAuthError = error?.code === 'EAUTH';
     return res.status(500).json({
       ok: false,
-      error: 'Failed to send resume. Please try again later.',
-      // Temporary diagnostic detail for production debugging (remove after fix)
-      detail: error?.message || String(error),
-      code: error?.code || null,
+      error: isAuthError
+        ? 'Email service authentication failed. Please try again later or download the resume directly.'
+        : 'Failed to send resume. Please try again later.',
     });
   }
 }
