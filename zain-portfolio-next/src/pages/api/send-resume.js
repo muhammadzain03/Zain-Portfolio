@@ -3,8 +3,57 @@
 // This endpoint validates the email and sends the resume PDF as an attachment
 
 import nodemailer from 'nodemailer';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
+
+function escapeHtml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+async function loadResumeBuffer(req) {
+  const fileName = 'Muhammad-Zain-Resume.pdf';
+  const candidates = [
+    join(process.cwd(), 'public', fileName),
+    join(process.cwd(), fileName),
+    join(process.cwd(), '.next', 'server', 'public', fileName),
+  ];
+
+  for (const filePath of candidates) {
+    try {
+      if (existsSync(filePath)) {
+        return readFileSync(filePath);
+      }
+    } catch (_) {
+      // Try next candidate
+    }
+  }
+
+  // Vercel serverless functions often cannot read public/ from disk.
+  // Fall back to fetching the statically served PDF over HTTPS.
+  const proto = (req.headers['x-forwarded-proto'] || 'https').toString().split(',')[0].trim();
+  const host = (
+    req.headers['x-forwarded-host'] ||
+    req.headers.host ||
+    'muhammadzain.app'
+  )
+    .toString()
+    .split(',')[0]
+    .trim();
+
+  const resumeUrl = `${proto}://${host}/${fileName}`;
+  const response = await fetch(resumeUrl);
+
+  if (!response.ok) {
+    throw new Error(`Unable to load resume PDF from ${resumeUrl} (${response.status})`);
+  }
+
+  return Buffer.from(await response.arrayBuffer());
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -13,18 +62,15 @@ export default async function handler(req, res) {
 
   const { name, email } = req.body || {};
 
-  // Validation
   if (!name || !email) {
     return res.status(400).json({ ok: false, error: 'Name and email are required' });
   }
 
-  // Basic email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return res.status(400).json({ ok: false, error: 'Invalid email address' });
   }
 
-  // Check for SMTP configuration
   const {
     EMAIL_HOST,
     EMAIL_PORT,
@@ -33,29 +79,31 @@ export default async function handler(req, res) {
   } = process.env;
 
   if (!EMAIL_HOST || !EMAIL_PORT || !EMAIL_USER || !EMAIL_PASS) {
-    return res.status(500).json({ 
-      ok: false, 
-      error: 'Email service not configured. Please try downloading directly.' 
+    return res.status(500).json({
+      ok: false,
+      error: 'Email service not configured. Please try downloading directly.',
     });
   }
 
   try {
-    // Create transporter
+    const port = Number(EMAIL_PORT);
     const transporter = nodemailer.createTransport({
       host: EMAIL_HOST,
-      port: Number(EMAIL_PORT),
-      secure: Number(EMAIL_PORT) === 465,
+      port,
+      secure: port === 465,
+      requireTLS: port === 587,
       auth: {
         user: EMAIL_USER,
         pass: EMAIL_PASS,
       },
+      connectionTimeout: 15000,
+      greetingTimeout: 15000,
+      socketTimeout: 20000,
     });
 
-    // Read the resume PDF file
-    const resumePath = join(process.cwd(), 'public', 'Muhammad-Zain-Resume.pdf');
-    const resumeBuffer = readFileSync(resumePath);
+    const resumeBuffer = await loadResumeBuffer(req);
+    const safeName = escapeHtml(name.trim());
 
-    // Send email with resume attachment
     await transporter.sendMail({
       from: `Muhammad Zain <${EMAIL_USER}>`,
       to: email,
@@ -101,10 +149,10 @@ export default async function handler(req, res) {
           </head>
           <body>
             <div class="header">
-              <h1>Thank You, ${name}!</h1>
+              <h1>Thank You, ${safeName}!</h1>
             </div>
             <div class="content">
-              <p>Hi ${name},</p>
+              <p>Hi ${safeName},</p>
               <p>Thank you for your interest in my profile! I've attached my resume to this email for your review.</p>
               <p>I'm a Software Engineering student at the University of Calgary with a passion for building innovative solutions. Feel free to reach out if you'd like to discuss potential opportunities or collaborations.</p>
               <p><strong>Connect with me:</strong></p>
@@ -121,14 +169,14 @@ export default async function handler(req, res) {
         </html>
       `,
       text: `
-Hi ${name},
+Hi ${name.trim()},
 
 Thank you for your interest in my profile! I've attached my resume to this email for your review.
 
 I'm a Software Engineering student at the University of Calgary with a passion for building innovative solutions. Feel free to reach out if you'd like to discuss potential opportunities or collaborations.
 
 Connect with me:
-- Email: muhammad.zain1@ucalgary.ca
+- Email: muhammadzain0476@gmail.com
 - Portfolio: https://muhammadzain.app/
 
 Best regards,
@@ -144,16 +192,15 @@ Software Engineering Student | University of Calgary
       ],
     });
 
-    // Optionally notify yourself of the resume request
     try {
       await transporter.sendMail({
         from: `Portfolio System <${EMAIL_USER}>`,
         to: 'muhammadzain0476@gmail.com',
-        subject: `Resume Request from ${name}`,
+        subject: `Resume Request from ${name.trim()}`,
         text: `
 Someone requested your resume!
 
-Name: ${name}
+Name: ${name.trim()}
 Email: ${email}
 Time: ${new Date().toISOString()}
         `,
@@ -162,17 +209,15 @@ Time: ${new Date().toISOString()}
       // Silent fail for notification
     }
 
-    return res.status(200).json({ 
-      ok: true, 
-      message: 'Resume sent successfully! Please check your email.' 
+    return res.status(200).json({
+      ok: true,
+      message: 'Resume sent successfully! Please check your email.',
     });
-
   } catch (error) {
-    console.error('Error sending resume:', error);
-    return res.status(500).json({ 
-      ok: false, 
-      error: 'Failed to send resume. Please try again later.' 
+    console.error('Error sending resume:', error?.message || error);
+    return res.status(500).json({
+      ok: false,
+      error: 'Failed to send resume. Please try again later.',
     });
   }
 }
-
