@@ -4,7 +4,7 @@
  * Notes: Optimized for touch interactions and mobile performance
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 export default function useSwipeGestures(onSwipeLeft, onSwipeRight, threshold = 50) {
   const [touchStart, setTouchStart] = useState(null);

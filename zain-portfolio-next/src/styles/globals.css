@@ -60,22 +60,6 @@ html, body {
   }
 }
 
-/* Force circular text animation to work regardless of motion preferences */
-.animate-spin-slow {
-  animation: spin 30s linear infinite !important;
-}
-
-/* Custom clockwise rotation animation for circular text */
-@keyframes spin-cw {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin-cw {
-  animation: spin-cw 30s linear infinite !important;
-}
-
 /* Core Web Vitals Optimizations */
 
 /* Font optimization for better LCP */
@@ -93,7 +77,7 @@ img, video {
 }
 
 /* Critical above-the-fold content optimization */
-.hero-section, .critical-content {
+.hero-section {
   contain: layout style paint;
   content-visibility: auto;
   contain-intrinsic-size: 1200px 800px;
@@ -137,10 +121,6 @@ button, a, [role="button"] {
   }
 }
 
-
-
-
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -157,10 +137,6 @@ button, a, [role="button"] {
   animation: breathingGlow 4s ease-in-out infinite;
   transform-origin: center;
 }
-
-
-
-
 
 .animate-fadeIn {
   animation: fadeIn 0.6s ease-out forwards;
@@ -203,8 +179,6 @@ button, a, [role="button"] {
     transparent 70%
   );
 }
-
-
 
 /* Enhanced profile picture glow effects to match navbar lightning */
 .profile-glow-enhanced {

@@ -47,21 +47,21 @@ Muhammad Zain – Software Engineering Portfolio
 #### Core Features
 - **Multi-page portfolio** with dedicated sections for home, about, projects, resume, and LeetCode
 - **Interactive project showcase** with modal image and video previews, live demo links for deployed projects, PDF references, and detailed descriptions
-- **Embedded resume viewer** with PDF display and download functionality
+- **Resume request form** that emails the resume PDF to visitors via a secure API endpoint
 - **Contact system** with floating launcher and quick-copy actions for email and social links
 - **Theme switching** with dark and light mode support and system preference detection
 
 #### User Experience
 - **Fully responsive design** optimized for mobile, tablet, and desktop viewports
 - **Smooth animations** using Framer Motion with GPU-friendly transforms and opacity changes
-- **Zero layout shift (CLS)** through proper image sizing and skeleton loading states
-- **Instant navigation** via idle-time route prefetching with a custom `usePrefetch` hook
-- **Accessibility-first** implementation with semantic HTML, ARIA labels, and keyboard navigation
+- **Layout stability** through proper image sizing and reserved space for media
+- **Faster navigation** via idle-time route prefetching with a custom `usePrefetch` hook
+- **Accessible UI** with semantic HTML, ARIA labels, and keyboard-friendly controls
 
 #### Technical Implementation
 - **SEO optimization** with per-page meta tags, Open Graph, Twitter cards, and structured data (JSON-LD)
-- **Performance monitoring** using Web Vitals with silent metrics collection
-- **Security headers** including strict CSP, HSTS, and content type validation
+- **Web Vitals measurement** using the `web-vitals` library (ready for analytics if configured)
+- **Security headers** including CSP, HSTS, and content type validation
 - **Image optimization** via the Next.js Image component with a custom wrapper for consistent sizing
 - **Code splitting** with dynamic imports for secondary UI components to reduce initial bundle size
 
@@ -77,10 +77,11 @@ Muhammad Zain – Software Engineering Portfolio
 - **Framer Motion** - Animation library for smooth, performant transitions
 - **next-themes** - Theme management with system preference detection
 - **react-icons** - Icon library with consistent styling
-- **web-vitals** - Performance metrics collection for Core Web Vitals
+- **nodemailer** - SMTP email delivery for resume requests and visit notifications
+- **web-vitals** - Core Web Vitals measurement
 
 #### Development & Build
-- **ESLint** - Code linting with custom rules
+- **ESLint** - Code linting with Next.js config
 - **PostCSS** - CSS processing and optimization
 - **Vercel** - Deployment platform with automatic builds
 
@@ -91,22 +92,30 @@ Muhammad Zain – Software Engineering Portfolio
 Zain Portfolio/
   README.md
   LICENSE
+  Lighthouse-score.png
   zain-portfolio-next/
     public/                      # Static assets
       images/
-        projects/                # Project preview images
+        profile/                 # Profile image
+        projects/                # Project preview images and videos
       Muhammad-Zain-Resume.pdf   # Resume file
       Lagrange.pdf               # Lumen Pendulum physics reference
       manifest.json              # PWA manifest
     src/
       components/                # Reusable UI components
+        Layout.js                # App shell layout
+        NavBar.js                # Desktop navigation
+        BottomNavigation.js      # Mobile navigation
+        Footer.js                # Site footer
         SEO.js                   # Per-page SEO management
         OptimizedImage.js        # Image wrapper with loading states
         ThemeSwitcher.js         # Dark/light theme toggle
-        NavBar.js                # Desktop navigation
-        BottomNavigation.js      # Mobile navigation
+        Contact.js               # Contact section wrapper
         ContactChat.js           # Floating contact launcher
+        CircularText.js          # Rotating contact badge text
+        MobileContact.js         # Mobile contact UI
         ResumeRequestForm.js     # Resume request form
+        WebVitals.js             # Web Vitals measurement
       hooks/                     # Custom React hooks
         usePrefetch.js           # Route prefetching logic
         useSwipeGestures.js      # Mobile gesture handling
@@ -115,35 +124,36 @@ Zain Portfolio/
         index.js                 # Home
         about.js                 # About
         projects.js              # Projects showcase
-        resume.js                # Resume viewer
+        resume.js                # Resume request form
         leetcode.js              # LeetCode profile
         api/notify-visit.js      # Visit notification endpoint
-        api/send-resume.js       # Resume request endpoint
+        api/send-resume.js       # Resume email endpoint
       styles/                    # Global styles and responsive design
     next.config.mjs              # Next.js configuration with security headers
+    vercel.json                  # Vercel function config for resume PDF
     tailwind.config.js           # Tailwind theme and component configuration
 ```
 
 <a name="performance-and-optimization"></a>
 ### Performance & Optimization
 
-<small>The production deployment at [muhammadzain.app](https://muhammadzain.app/) maintains strong Lighthouse scores across all categories.</small>
+<small>A production Lighthouse audit of [muhammadzain.app](https://muhammadzain.app/) achieved 100/100 across all categories. Scores can vary by device, network, and Lighthouse version.</small>
 
-#### Lighthouse Results (Production)
+#### Lighthouse Results (Production Audit)
 - **Performance: 100/100** - Optimized LCP, FID, and CLS metrics
-- **Accessibility: 100/100** - WCAG compliance with semantic structure
+- **Accessibility: 100/100** - Semantic structure and accessible controls
 - **Best Practices: 100/100** - Security headers, HTTPS, and modern standards
-- **SEO: 100/100** - Complete meta tags, structured data, and crawlability
+- **SEO: 100/100** - Meta tags, structured data, and crawlability
 
-<small>Scores verified on the production deployment at [muhammadzain.app](https://muhammadzain.app/).</small>
+![Lighthouse score (production)](Lighthouse-score.png)
 
 #### Optimization Techniques
 - **LCP optimization** - Hero images use `priority` loading and avoid fade-in animations
 - **JavaScript optimization** - Code splitting reduces initial bundle to essential components only
 - **Image handling** - Responsive images with proper `sizes` attributes and WebP format
 - **Animation performance** - GPU-accelerated transforms avoid layout thrashing
-- **Prefetching strategy** - Routes prefetch during idle time for instant navigation
-- **Bundle analysis** - Tree shaking eliminates unused code in production builds
+- **Prefetching strategy** - Routes prefetch during idle time for faster navigation
+- **Tree shaking** - Unused code is eliminated in production builds
 
 <a name="deployment-and-production"></a>
 ### Deployment & Production
@@ -154,12 +164,12 @@ Zain Portfolio/
 - Development builds include HMR, React refresh, and debugging tools
 - Production builds enable minification, tree-shaking, and static optimization
 - Automatic image optimization and WebP conversion during build
-- Environment-specific configuration for analytics and performance monitoring</small>
+- SMTP credentials configured via Vercel environment variables for email features</small>
 
-<small>**Performance Monitoring:**
-- Web Vitals collection in production for real user metrics
-- Lighthouse CI integration for automated performance testing
-- Error tracking and performance regression detection</small>
+<small>**Runtime Notes:**
+- Web Vitals are measured client-side and can be forwarded to analytics if configured
+- Visit notifications and resume emails are sent through Nodemailer over SMTP
+- Manual Lighthouse audits are used to validate production performance</small>
 
 <a name="development-process"></a>
 ### Development Process
@@ -173,16 +183,16 @@ Zain Portfolio/
 - **Cross-browser testing** - Verified compatibility across modern browsers and devices
 
 #### Key Implementation Details
-- **SEO strategy** - Structured data, meta tags, and sitemap generation for search visibility
+- **SEO strategy** - Structured data, meta tags, and Open Graph for search and social sharing
 - **Security implementation** - CSP headers, input validation, and secure deployment practices
 - **Code organization** - Component-based architecture with clear separation of concerns
-- **Performance monitoring** - Integrated analytics for tracking user experience metrics
+- **Email workflows** - Resume delivery and visit notifications via SMTP
 
 #### Quality Assurance
 - Manual testing across desktop, tablet, and mobile viewports
-- Lighthouse audits for both desktop and mobile in production environment
-- Code review processes for maintainability and performance optimization
-- Accessibility testing with screen readers and keyboard navigation
+- Lighthouse audits on the production deployment
+- Accessibility checks with keyboard navigation and semantic markup
+- Ongoing review for maintainability and performance regressions
 
 <a name="contributing"></a>
 ### Contributing

@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "powershell -command \"if (Test-Path .next) { Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue }; if (Test-Path node_modules\\.cache) { Remove-Item node_modules\\.cache -Recurse -Force -ErrorAction SilentlyContinue }; Write-Host 'Cache cleared'\"",
-    "dev:fast": "powershell -command \"if (Test-Path .next) { Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue }\" && next dev",
-    "analyze": "cross-env ANALYZE=true npm run build"
+    "dev:fast": "powershell -command \"if (Test-Path .next) { Remove-Item .next -Recurse -Force -ErrorAction SilentlyContinue }\" && next dev"
   },
   "dependencies": {
     "framer-motion": "^12.15.0",
@@ -23,9 +22,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@next/bundle-analyzer": "^15.4.6",
     "autoprefixer": "^10.4.19",
-    "cross-env": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
     "postcss": "^8.4.38",
