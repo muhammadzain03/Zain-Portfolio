@@ -218,6 +218,9 @@ Time: ${new Date().toISOString()}
     return res.status(500).json({
       ok: false,
       error: 'Failed to send resume. Please try again later.',
+      // Temporary diagnostic detail for production debugging (remove after fix)
+      detail: error?.message || String(error),
+      code: error?.code || null,
     });
   }
 }
