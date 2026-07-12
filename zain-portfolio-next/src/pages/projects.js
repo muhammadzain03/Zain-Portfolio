@@ -220,6 +220,13 @@ export default function Projects() {
     setShowVideo(false); // Always start with image
   }, []);
 
+  // Play badge on a gallery panel: open the modal straight into the video.
+  const handlePlayProject = useCallback((project) => {
+    setModalProject(project);
+    setIsModalOpen(true);
+    setShowVideo(true);
+  }, []);
+
   const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
     setShowVideo(false);
@@ -290,7 +297,11 @@ export default function Projects() {
           className="pb-16"
           aria-label="Projects showcase"
         >
-          <ProjectGallery projects={projects} onOpenProject={handleOpenProject} />
+          <ProjectGallery
+            projects={projects}
+            onOpenProject={handleOpenProject}
+            onPlayVideo={handlePlayProject}
+          />
         </motion.section>
 
         {/* GitHub Profile Link */}

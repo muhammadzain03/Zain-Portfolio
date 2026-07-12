@@ -19,7 +19,7 @@ import {
   animate,
 } from 'framer-motion';
 import Image from 'next/image';
-import { FaGithub, FaExternalLinkAlt, FaFilePdf, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaFilePdf, FaChevronLeft, FaChevronRight, FaPlay } from 'react-icons/fa';
 
 const EASE = [0.22, 1, 0.36, 1];
 const GLIDE = { type: 'spring', stiffness: 160, damping: 27, restDelta: 0.5 };
@@ -59,8 +59,24 @@ const GalleryPanel = memo(function GalleryPanel({
   cardH,
   maxAngle,
   onSelect,
+  onPlay,
 }) {
   const [hovered, setHovered] = useState(false);
+  const videoRef = useRef(null);
+
+  // Drive inline preview playback from React state, NOT from the <video>'s own
+  // mouse events - overlay spans sit above the video and swallow those events,
+  // which is why hover-play only "sometimes" worked before.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (hovered) {
+      v.currentTime = 0;
+      v.play().catch(() => {});
+    } else {
+      v.pause();
+    }
+  }, [hovered]);
 
   // Wrapped signed distance of this panel's center from the viewport center.
   // Mapping into (-totalW/2, totalW/2] is what makes the loop endless: the
@@ -120,10 +136,11 @@ const GalleryPanel = memo(function GalleryPanel({
           style={{ transform: 'translateZ(0)' }}
         />
 
-        {/* Hover video preview (same behavior the grid cards had) */}
+        {/* Hover video preview - playback driven by the hovered state above */}
         {project.hasVideo && (
           <motion.video
-            className="absolute inset-0 w-full h-full object-cover"
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             muted
             loop
             playsInline
@@ -133,25 +150,31 @@ const GalleryPanel = memo(function GalleryPanel({
             initial={{ opacity: 0 }}
             animate={{ opacity: hovered ? 1 : 0 }}
             transition={{ duration: 0.4 }}
-            onMouseEnter={(e) => {
-              e.target.currentTime = 0;
-              e.target.play().catch(() => {});
-            }}
-            onMouseLeave={(e) => {
-              e.target.pause();
-            }}
           >
             <source src={project.video} type="video/mp4" />
           </motion.video>
         )}
 
         {/* Editorial index tag, video-style */}
-        <span className="absolute top-3 left-4 text-[11px] font-semibold tracking-[0.25em] text-white/70 mix-blend-difference select-none">
+        <span className="absolute top-3 left-4 text-[11px] font-semibold tracking-[0.25em] text-white/70 mix-blend-difference select-none pointer-events-none">
           {String(index + 1).padStart(2, '0')}
         </span>
 
-        <span className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+        <span className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
       </button>
+
+      {/* Visible play badge: signals "this project has a video" and opens it
+          directly. Sibling of the panel button (never nested - invalid HTML). */}
+      {project.hasVideo && (
+        <button
+          type="button"
+          aria-label={`Play ${project.title} video`}
+          onClick={() => onPlay(index)}
+          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center bg-primary/90 dark:bg-primaryDark/90 text-white shadow-lg backdrop-blur-sm hover:scale-110 focus-visible:ring-2 focus-visible:ring-white transition-transform duration-200"
+        >
+          <FaPlay className="text-[10px] ml-0.5" />
+        </button>
+      )}
     </motion.div>
   );
 });
@@ -242,7 +265,7 @@ const GalleryCaption = memo(function GalleryCaption({ project, index, total, onO
   );
 });
 
-export default function ProjectGallery({ projects, onOpenProject }) {
+export default function ProjectGallery({ projects, onOpenProject, onPlayVideo }) {
   const reduceMotion = useReducedMotion();
   const { vw, cardW, cardH, gap, mounted } = useGalleryMetrics();
   const step = cardW + gap;
@@ -292,6 +315,15 @@ export default function ProjectGallery({ projects, onOpenProject }) {
     [cardW, onOpenProject, projects, glideTo, x]
   );
 
+  // Play-badge click: open the modal straight into the video (pan-guarded).
+  const handlePlay = useCallback(
+    (index) => {
+      if (panMoved.current) return;
+      onPlayVideo(projects[index]);
+    },
+    [onPlayVideo, projects]
+  );
+
   // Wheel inside the strip moves the loop (it never ends, so it always
   // consumes); the caption area below stays free for normal page scrolling.
   useEffect(() => {
@@ -330,15 +362,29 @@ export default function ProjectGallery({ projects, onOpenProject }) {
       <div>
         <div className="flex gap-6 overflow-x-auto px-6 pb-6 snap-x snap-mandatory">
           {projects.map((project) => (
-            <button
+            <div
               key={project.id}
-              type="button"
-              onClick={() => onOpenProject(project)}
-              aria-label={`Open ${project.title} preview`}
-              className="relative flex-shrink-0 w-[78vw] md:w-[52vw] max-w-[720px] aspect-[8/5] snap-center overflow-hidden rounded-lg border border-black/10 dark:border-white/10"
+              className="relative flex-shrink-0 w-[78vw] md:w-[52vw] max-w-[720px] aspect-[8/5] snap-center"
             >
-              <Image src={project.image} alt={project.title} fill className="object-cover" sizes="78vw" />
-            </button>
+              <button
+                type="button"
+                onClick={() => onOpenProject(project)}
+                aria-label={`Open ${project.title} preview`}
+                className="relative block w-full h-full overflow-hidden rounded-lg border border-black/10 dark:border-white/10"
+              >
+                <Image src={project.image} alt={project.title} fill className="object-cover" sizes="78vw" />
+              </button>
+              {project.hasVideo && (
+                <button
+                  type="button"
+                  aria-label={`Play ${project.title} video`}
+                  onClick={() => onPlayVideo(project)}
+                  className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center bg-primary/90 dark:bg-primaryDark/90 text-white shadow-lg"
+                >
+                  <FaPlay className="text-[10px] ml-0.5" />
+                </button>
+              )}
+            </div>
           ))}
         </div>
         <GalleryCaption
@@ -404,6 +450,7 @@ export default function ProjectGallery({ projects, onOpenProject }) {
               cardH={cardH}
               maxAngle={maxAngle}
               onSelect={handleSelect}
+              onPlay={handlePlay}
             />
           ))}
         </motion.div>

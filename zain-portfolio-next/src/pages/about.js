@@ -169,43 +169,53 @@ export default function About() {
                   },
                   {
                     title: "Backend & APIs",
-                    skills: ["Node.js (Express)", "Flask", "RESTful APIs", "JSON", "JWT Auth", "WebSockets"],
+                    skills: ["Node.js (Express)", "Flask", "RESTful APIs", "Gunicorn", "JWT Auth (Access + Refresh Tokens)", "Google OAuth", "Rate Limiting (Flask-Limiter)", "JSON", "WebSockets"],
                     delay: 0.2
                   },
                   {
-                    title: "Databases",
-                    skills: ["MySQL", "PostgreSQL", "MongoDB", "Firebase (Realtime Database, Firestore)", "SQLite"],
+                    title: "AI & LLM Engineering",
+                    skills: ["LLM Integration (Gemini)", "OpenAI-Compatible APIs", "Prompt Engineering", "Structured JSON Output", "Hybrid AI + Deterministic Pipelines", "RAG Patterns", "Web Speech API (TTS/STT)"],
                     delay: 0.25
                   },
                   {
-                    title: "DevOps & Cloud",
-                    skills: ["AWS (EC2, S3, Lambda)", "Docker", "Heroku", "GitHub Actions", "Vercel", "Netlify"],
+                    title: "Graphics, 3D & Animation",
+                    skills: ["Three.js", "WebGL", "Framer Motion", "CSS 3D & Perspective", "Physics Simulation (Lagrangian, RK4)", "Bloom Post-Processing", "Inverse Kinematics (FABRIK)"],
                     delay: 0.3
                   },
                   {
-                    title: "Version Control & CI/CD",
-                    skills: ["Git", "GitHub", "Bitbucket", "Sourcetree", "GitHub Actions"],
+                    title: "Databases",
+                    skills: ["PostgreSQL", "MySQL", "SQLite", "MongoDB", "Firebase (Realtime Database, Firestore)", "Connection Pooling", "Schema Design & Triggers"],
                     delay: 0.35
                   },
                   {
-                    title: "Testing & QA",
-                    skills: ["JUnit", "Selenium", "Postman (API Testing)", "PyTest", "Mocha", "Chai"],
+                    title: "DevOps & Cloud",
+                    skills: ["Docker", "Docker Compose", "GCP (Cloud Run, Cloud SQL, GCS)", "Vercel", "Render", "Neon", "GitHub Actions", "AWS (EC2, S3, Lambda)", "Heroku", "Netlify"],
                     delay: 0.4
                   },
                   {
-                    title: "Data Science & Machine Learning",
-                    skills: ["Pandas", "NumPy", "scikit-learn", "TensorFlow (beginner)", "Jupyter Notebooks"],
+                    title: "Version Control & CI/CD",
+                    skills: ["Git", "GitHub", "GitHub Actions (CI/CD)", "Bitbucket", "Sourcetree"],
                     delay: 0.45
                   },
                   {
-                    title: "Development Tools",
-                    skills: ["Visual Studio Code", "IntelliJ IDEA", "Eclipse", "Git Workflow", "API Development", "JSON"],
+                    title: "Testing & QA",
+                    skills: ["JUnit", "Mockito", "Cypress (E2E)", "Jest + React Testing Library", "PIT Mutation Testing", "Locust (Load Testing)", "Selenium", "Postman (API Testing)", "PyTest"],
                     delay: 0.5
                   },
                   {
-                    title: "UI/UX & Design",
-                    skills: ["Figma", "Canva", "Responsive Design", "User Interface Design", "Wireframing"],
+                    title: "Data Science & Machine Learning",
+                    skills: ["Pandas", "NumPy", "scikit-learn", "SciPy (Statistical Analysis)", "Gradient-Boosted Models", "Matplotlib", "TensorFlow (beginner)", "Jupyter Notebooks"],
                     delay: 0.55
+                  },
+                  {
+                    title: "Development Tools",
+                    skills: ["Visual Studio Code", "IntelliJ IDEA", "Eclipse", "Qt (Desktop UI)", "CMake", "Git Workflow", "API Development"],
+                    delay: 0.6
+                  },
+                  {
+                    title: "UI/UX & Design",
+                    skills: ["Figma", "Canva", "Responsive Design", "User Interface Design", "Wireframing", "Accessibility (WCAG AA)"],
+                    delay: 0.65
                   }
                 ].map((category, index) => (
                   <SkillCategory
