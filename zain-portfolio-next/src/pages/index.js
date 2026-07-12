@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 // Defer Contact to reduce initial JS without changing UI
 const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 import SEO from '@/components/SEO';
+import EntranceOverlay from '@/components/EntranceOverlay';
 import profilePic from "../../public/images/profile/zain.webp";
 import { motion } from 'framer-motion';
 
@@ -32,6 +33,9 @@ export default function Home() {
       <Head>
         <meta name="application-name" content="Muhammad Zain Portfolio" />
       </Head>
+
+      {/* Cinematic once-per-session intro (homepage only) */}
+      <EntranceOverlay />
 
       <main className="flex flex-col w-full min-h-screen bg-light dark:bg-dark hero-section">
         {/* Initials Badge */}

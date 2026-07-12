@@ -1,21 +1,31 @@
 /**
  * pages/projects.js
- * Purpose: Projects grid with modal image/video preview; motion-rich cards.
+ * Purpose: Projects page - horizontal 3D gallery (Alche-style works strip) with
+ * an editorial caption block and the existing modal image/video preview.
  */
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
 const Contact = dynamic(() => import('@/components/Contact'), { ssr: false });
 import SEO from '@/components/SEO';
-import { useState, useCallback, useMemo, memo } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaTimes, FaPlay, FaFilePdf } from 'react-icons/fa';
-import { FiRefreshCw } from 'react-icons/fi';
+import ProjectGallery from '@/components/ProjectGallery';
+import { useState, useCallback, memo } from 'react';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaPlay } from 'react-icons/fa';
 import Image from 'next/image';
-import useSwipeGestures from '@/hooks/useSwipeGestures';
-import usePullToRefresh from '@/hooks/usePullToRefresh';
 
-// Project data
+// Project data - array order = display order (RCC leads as the flagship)
 const projects = [
+  {
+    id: 7,
+    title: "Resume & Career Coach (RCC)",
+    category: "AI-Powered Career Platform",
+    description: "A production AI platform, live at resumecoach.app, that scores resumes against job descriptions with a hybrid deterministic + LLM pipeline, pinpoints missing skills and requirement gaps, and runs voice-enabled mock interviews. Ships with JWT and Google OAuth authentication, email code verification, and a React, Flask, and PostgreSQL stack deployed across Vercel, Render, and Neon.",
+    image: "/images/projects/Resume Career Coach.png",
+    github: "https://github.com/muhammadzain03/AI-Resume-and-Career-Coach",
+    liveDemo: "https://resumecoach.app/",
+    technologies: ["React", "Flask", "PostgreSQL", "Gemini LLM", "Docker", "JWT + OAuth"],
+    hasVideo: false
+  },
   {
     id: 6,
     title: "Lumen Pendulum",
@@ -62,16 +72,6 @@ const projects = [
     hasVideo: true
   },
   {
-    id: 4,
-    title: "Purrfect Innovations",
-    category: "Frontend E-commerce Website",
-    description: "A clean, static e-commerce website for cat enthusiasts, crafted using HTML and CSS to highlight best practices in responsive web design. Showcases a simple product catalog, user-friendly navigation, and polished layouts - all demonstrating frontend fundamentals and attention to accessibility.",
-    image: "/images/projects/Purrfect Innovations.webp",
-    github: "https://github.com/muhammadzain03/Purrfect-Innovations",
-    technologies: ["HTML", "CSS", "Responsive Design", "UI/UX"],
-    hasVideo: false
-  },
-  {
     id: 5,
     title: "Art Museum Database Management System",
     category: "Role-Based Database Solution",
@@ -79,6 +79,16 @@ const projects = [
     image: "/images/projects/Art Museum.webp",
     github: "https://github.com/muhammadzain03/Art-Museum-Database-Management-System-SQL",
     technologies: ["Python", "MySQL", "SQL", "Role-Based Access", "Security"],
+    hasVideo: false
+  },
+  {
+    id: 4,
+    title: "Purrfect Innovations",
+    category: "Frontend E-commerce Website",
+    description: "A clean, static e-commerce website for cat enthusiasts, crafted using HTML and CSS to highlight best practices in responsive web design. Showcases a simple product catalog, user-friendly navigation, and polished layouts - all demonstrating frontend fundamentals and attention to accessibility.",
+    image: "/images/projects/Purrfect Innovations.webp",
+    github: "https://github.com/muhammadzain03/Purrfect-Innovations",
+    technologies: ["HTML", "CSS", "Responsive Design", "UI/UX"],
     hasVideo: false
   }
 ];
@@ -139,7 +149,7 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
                     sizes="(max-width: 768px) 85vw, (max-width: 1200px) 85vw, 85vw"
                   />
                 </motion.div>
-                
+
                 {/* Compact Video Play Button Overlay */}
                 {project.hasVideo && (
                   <motion.button
@@ -199,216 +209,12 @@ const ProjectModal = memo(({ project, isOpen, onClose, showVideo, onVideoToggle 
 
 ProjectModal.displayName = 'ProjectModal';
 
-// ProjectCard Component with Performance Optimizations - Memoized
-const ProjectCard = memo(({ project, index, onCardClick }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: index * 0.2 }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -10 }}
-      className="group relative flex flex-col h-full bg-gradient-to-br from-light/60 via-light/50 to-light/60 dark:from-dark/60 dark:via-dark/50 dark:to-dark/60 backdrop-blur-sm rounded-2xl border border-primary/20 dark:border-primaryDark/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
-      style={{ transform: 'translateZ(0)' }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Project Image/Video Container */}
-      <div 
-        className="relative h-64 overflow-hidden rounded-t-2xl cursor-pointer"
-        onClick={() => onCardClick(project)}
-      >
-        {/* Background Image */}
-        <motion.div
-          className="w-full h-full"
-          initial={{ scale: 1 }}
-          whileHover={{ scale: 1.1 }}
-        >
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-            loading={index === 0 ? 'eager' : 'lazy'}
-            priority={index === 0}
-            style={{ transform: 'translateZ(0)' }}
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
-        </motion.div>
-        
-        {/* Video Overlay (only for projects with videos) */}
-        {project.hasVideo && (
-          <motion.video
-            key={project.video}
-            className="absolute inset-0 w-full h-full object-cover"
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            style={{ transform: 'translateZ(0)' }}
-            aria-hidden="true"
-            role="presentation"
-            tabIndex={-1}
-            onMouseEnter={(e) => {
-              e.target.currentTime = 0;
-              e.target.play().catch(() => {});
-            }}
-            onMouseLeave={(e) => {
-              e.target.pause();
-              e.target.currentTime = 0;
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHovered ? 1 : 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <source src={project.video} type="video/mp4" />
-            <source src={project.video} type="video/webm" />
-            Your browser does not support the video tag.
-          </motion.video>
-        )}
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
-        
-        {/* Project Category Badge */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
-          className="absolute top-4 left-4 px-3 py-1 bg-primary/90 dark:bg-primaryDark/90 backdrop-blur-sm rounded-full"
-        >
-          <span className="text-xs font-medium text-white">
-            {project.category}
-          </span>
-        </motion.div>
-      </div>
-
-      {/* Project Content */}
-      <div className="p-6 flex flex-col flex-1">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.4 }}
-          className="text-xl font-bold text-dark dark:text-light mb-3 group-hover:text-primary dark:group-hover:text-primaryDark transition-colors duration-300"
-        >
-          {project.title}
-        </motion.h2>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
-          className="text-sm text-dark/70 dark:text-light/70 mb-4 leading-relaxed text-justify"
-        >
-          {project.description}
-        </motion.p>
-
-        {/* Technologies */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.6 }}
-          className="flex flex-wrap gap-2 mb-6 mt-auto"
-        >
-          {project.technologies.map((tech, techIndex) => (
-            <span
-              key={techIndex}
-              className="px-2 py-1 bg-primary/10 dark:bg-primaryDark/10 text-primary dark:text-primaryDark text-xs rounded-full border border-primary/20 dark:border-primaryDark/20"
-            >
-              {tech}
-            </span>
-          ))}
-        </motion.div>
-
-        {/* Project Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.7 }}
-          className="flex flex-wrap items-center gap-3"
-        >
-          {project.liveDemo && (
-            <motion.a
-              href={project.liveDemo}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View ${project.title} live demo`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300"
-            >
-              <FaExternalLinkAlt className="text-xs" />
-              <span>View Live</span>
-            </motion.a>
-          )}
-          <motion.a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`View ${project.title} on GitHub`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300"
-          >
-            <FaGithub />
-            <span>View on GitHub</span>
-            <FaExternalLinkAlt className="text-xs" />
-          </motion.a>
-          {project.pdf && (
-            <motion.a
-              href={project.pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View ${project.title} reference PDF`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-dark/80 to-dark/60 dark:from-light/20 dark:to-light/10 text-white text-sm font-medium rounded-lg hover:shadow-lg transition-all duration-300 border border-primary/20 dark:border-primaryDark/20"
-            >
-              <FaFilePdf />
-              <span>Lagrange PDF</span>
-            </motion.a>
-          )}
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-});
-
-ProjectCard.displayName = 'ProjectCard';
-
 export default function Projects() {
   const [modalProject, setModalProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 
-  // Pull to refresh functionality
-  const handleRefresh = useCallback(async () => {
-    // Simulate refresh delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    // In a real app, you'd refetch data here
-  }, []);
-
-  const { isPulling, isRefreshing, pullDistance, pullProgress } = usePullToRefresh(handleRefresh);
-
-  // Swipe gestures for mobile navigation
-  const handleSwipeLeft = useCallback(() => {
-    if (currentProjectIndex < projects.length - 1) {
-      setCurrentProjectIndex(prev => prev + 1);
-    }
-  }, [currentProjectIndex]);
-
-  const handleSwipeRight = useCallback(() => {
-    if (currentProjectIndex > 0) {
-      setCurrentProjectIndex(prev => prev - 1);
-    }
-  }, [currentProjectIndex]);
-
-  const swipeGestures = useSwipeGestures(handleSwipeLeft, handleSwipeRight);
-
-  const handleCardClick = useCallback((project) => {
+  const handleOpenProject = useCallback((project) => {
     setModalProject(project);
     setIsModalOpen(true);
     setShowVideo(false); // Always start with image
@@ -424,56 +230,29 @@ export default function Projects() {
     setShowVideo(prev => !prev);
   }, []);
 
-  // Memoize projects to prevent unnecessary re-renders
-  const memoizedProjects = useMemo(() => projects, []);
-
   return (
     <>
       <SEO
         title="Projects Portfolio | Muhammad Zain - Software Engineering Showcase"
-        description="Explore Muhammad Zain's diverse software engineering projects including CityX Subway Display System, Flight Operations Manager, TechVista E-commerce Platform, and more. Featuring real-time systems, full-stack development, and innovative solutions."
+        description="Explore Muhammad Zain's software engineering projects, led by Resume & Career Coach (RCC), an AI-powered career platform, plus Lumen Pendulum, CityX Subway Display System, Flight Operations Manager, and more."
         canonical="/projects"
         ogType="website"
       />
-      
-              <Head>
-          {/* Project-specific optimizations */}
-          <meta name="robots" content="index,follow" />
-        </Head>
 
-      <main className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light" {...swipeGestures}>
-        {/* Pull to Refresh Indicator */}
-        {(isPulling || isRefreshing) && (
-          <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ 
-              opacity: isPulling ? pullProgress : 1, 
-              y: isPulling ? pullDistance * 0.3 : 0 
-            }}
-            className="fixed top-16 left-1/2 transform -translate-x-1/2 z-40 bg-primary/90 dark:bg-primaryDark/90 text-white px-4 py-2 rounded-full shadow-lg backdrop-blur-sm"
-          >
-            <div className="flex items-center space-x-2">
-              <motion.div
-                animate={{ rotate: isRefreshing ? 360 : 0 }}
-                transition={{ duration: 1, repeat: isRefreshing ? Infinity : 0, ease: "linear" }}
-              >
-                <FiRefreshCw className="h-4 w-4" />
-              </motion.div>
-              <span className="text-sm font-medium">
-                {isRefreshing ? 'Refreshing...' : pullProgress >= 1 ? 'Release to refresh' : 'Pull to refresh'}
-              </span>
-            </div>
-          </motion.div>
-        )}
+      <Head>
+        {/* Project-specific optimizations */}
+        <meta name="robots" content="index,follow" />
+      </Head>
 
-        {/* Hero Section */}
-        <section className="pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 2xl:px-48">
-          <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto">
+      <main className="min-h-screen bg-light dark:bg-dark text-dark dark:text-light overflow-x-hidden">
+        {/* Editorial header */}
+        <section className="pt-20 sm:pt-24 pb-8 px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-16"
+              className="text-center mb-4"
             >
               <motion.h1
                 initial={{ opacity: 0, scale: 0.5 }}
@@ -483,120 +262,67 @@ export default function Projects() {
               >
                 My Projects
               </motion.h1>
-              
+
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="w-20 sm:w-24 md:w-28 h-[2px] bg-gradient-to-r from-primary to-primaryDark dark:from-primaryDark dark:to-primary mx-auto mb-8"
               />
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-xs md:text-sm text-dark/80 dark:text-light/80 max-w-3xl mx-auto leading-relaxed text-center"
               >
-                Explore my journey through code, creativity, and problem-solving. Each project represents a milestone in my development as a software engineer, showcasing diverse technologies and innovative solutions.
+                Explore my journey through code, creativity, and problem-solving. Drag, scroll, or use the arrows to move through the gallery, and click a project to preview it.
               </motion.p>
             </motion.div>
-
-            {/* Projects Grid - Desktop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16"
-            >
-              {memoizedProjects.map((project, index) => (
-                <div key={project.id} className={`h-full ${index === memoizedProjects.length - 1 && memoizedProjects.length % 2 === 1 ? "lg:col-span-2 lg:flex lg:justify-center" : ""}`}>
-                  <div className={`h-full ${index === memoizedProjects.length - 1 && memoizedProjects.length % 2 === 1 ? "lg:w-full lg:max-w-lg" : ""}`}>
-                    <ProjectCard 
-                      project={project} 
-                      index={index} 
-                      onCardClick={handleCardClick}
-                    />
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Mobile Projects Carousel */}
-            <div className="md:hidden mb-16">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="overflow-hidden"
-              >
-                <motion.div
-                  className="flex transition-transform duration-300 ease-out"
-                  style={{ transform: `translateX(-${currentProjectIndex * 100}%)` }}
-                >
-                  {memoizedProjects.map((project, index) => (
-                    <div key={project.id} className="w-full flex-shrink-0 px-4">
-                      <ProjectCard 
-                        project={project} 
-                        index={index} 
-                        onCardClick={handleCardClick}
-                      />
-                    </div>
-                  ))}
-                </motion.div>
-              </motion.div>
-
-              {/* Mobile Navigation Dots */}
-              <div className="flex justify-center mt-6 space-x-2">
-                {memoizedProjects.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentProjectIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                      index === currentProjectIndex 
-                        ? 'bg-primary dark:bg-primaryDark w-6' 
-                        : 'bg-dark/20 dark:bg-light/20'
-                    }`}
-                    aria-label={`Go to project ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              {/* Swipe Instruction */}
-              <p className="text-center text-xs text-dark/50 dark:text-light/50 mt-4">
-                Swipe left or right to navigate projects
-              </p>
-            </div>
-
-            {/* GitHub Profile Link */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <motion.a
-                href="https://github.com/muhammadzain03"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View all projects on GitHub"
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-light/60 via-light/50 to-light/60 dark:from-dark/60 dark:via-dark/50 dark:to-dark/60 backdrop-blur-sm rounded-xl border border-primary/20 dark:border-primaryDark/20 shadow-lg hover:shadow-2xl transition-all duration-500"
-              >
-                <FaGithub className="text-lg text-primary dark:text-primaryDark" />
-                <div className="text-left">
-                  <div className="text-base font-semibold text-dark dark:text-light">
-                    View All Projects
-                  </div>
-                  <div className="text-xs text-dark/60 dark:text-light/60">
-                    @muhammadzain03
-                  </div>
-                </div>
-                <FaExternalLinkAlt className="text-primary dark:text-primaryDark" />
-              </motion.a>
-            </motion.div>
           </div>
+        </section>
+
+        {/* Horizontal 3D gallery */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="pb-16"
+          aria-label="Projects showcase"
+        >
+          <ProjectGallery projects={projects} onOpenProject={handleOpenProject} />
+        </motion.section>
+
+        {/* GitHub Profile Link */}
+        <section className="pb-16 px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <motion.a
+              href="https://github.com/muhammadzain03"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View all projects on GitHub"
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-br from-light/60 via-light/50 to-light/60 dark:from-dark/60 dark:via-dark/50 dark:to-dark/60 backdrop-blur-sm rounded-xl border border-primary/20 dark:border-primaryDark/20 shadow-lg hover:shadow-2xl transition-all duration-500"
+            >
+              <FaGithub className="text-lg text-primary dark:text-primaryDark" />
+              <div className="text-left">
+                <div className="text-base font-semibold text-dark dark:text-light">
+                  View All Projects
+                </div>
+                <div className="text-xs text-dark/60 dark:text-light/60">
+                  @muhammadzain03
+                </div>
+              </div>
+              <FaExternalLinkAlt className="text-primary dark:text-primaryDark" />
+            </motion.a>
+          </motion.div>
         </section>
 
         {/* Contact Component */}

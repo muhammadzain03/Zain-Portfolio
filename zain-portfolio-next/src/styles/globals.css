@@ -238,3 +238,9 @@ button, a, [role="button"] {
   );
   box-shadow: 0 0 16px rgba(96, 165, 250, 1);
 }
+
+/* Entrance overlay: hidden pre-paint for visitors who already saw it this
+   session (attribute set by the inline guard script in _document.js) */
+html[data-entrance="seen"] .entrance-overlay {
+  display: none;
+}

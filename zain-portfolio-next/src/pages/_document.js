@@ -23,6 +23,16 @@ export default function Document() {
           * { text-rendering: optimizeLegibility; }
           img, svg { display: block; }
         `}</style>
+
+        {/* Entrance pre-paint guard: returning visitors in this session never
+            see a single frame of the intro overlay (same idiom next-themes
+            uses for theme). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('mz-entrance')==='1')document.documentElement.setAttribute('data-entrance','seen')}catch(e){}",
+          }}
+        />
         {/* Critical Resource Preconnections - Already defined above */}
         
         {/* Optimized Font Loading for Better LCP */}
