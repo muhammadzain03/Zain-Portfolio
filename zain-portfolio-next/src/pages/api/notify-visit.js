@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     EMAIL_PORT,
     EMAIL_USER,
     EMAIL_PASS,
-    EMAIL_TO = 'muhammadzain0476@gmail.com',
+    EMAIL_TO = 'muhammadzain.dev2@gmail.com',
   } = process.env;
   if (!EMAIL_HOST || !EMAIL_PORT || !EMAIL_USER || !EMAIL_PASS) {
     return;

@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const ContactChat = ({ isOpen, onClose }) => {
   const [copied, setCopied] = useState('');
-  const email = 'muhammadzain0476@gmail.com';
+  const email = 'muhammadzain.dev2@gmail.com';
   const phone = '+1 (587) 577-8034';
 
   const copyToClipboard = (text, type) => {

@@ -209,7 +209,7 @@ Zain Portfolio/
 
 - **Project Maintainer:** Muhammad Zain
 - **Website:** [muhammadzain.app](https://muhammadzain.app/)
-- **Email:** muhammadzain0476@gmail.com
+- **Email:** muhammadzain.dev2@gmail.com
 
 <div align="center">
 

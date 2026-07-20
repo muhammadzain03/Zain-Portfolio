@@ -157,7 +157,7 @@ export default async function handler(req, res) {
               <p>I'm a Software Engineering student at the University of Calgary with a passion for building innovative solutions. Feel free to reach out if you'd like to discuss potential opportunities or collaborations.</p>
               <p><strong>Connect with me:</strong></p>
               <ul>
-                <li>Email: <a href="mailto:muhammadzain0476@gmail.com">muhammadzain0476@gmail.com</a></li>
+                <li>Email: <a href="mailto:muhammadzain.dev2@gmail.com">muhammadzain.dev2@gmail.com</a></li>
                 <li>Portfolio: <a href="https://muhammadzain.app/">View my work</a></li>
               </ul>
             </div>
@@ -176,7 +176,7 @@ Thank you for your interest in my profile! I've attached my resume to this email
 I'm a Software Engineering student at the University of Calgary with a passion for building innovative solutions. Feel free to reach out if you'd like to discuss potential opportunities or collaborations.
 
 Connect with me:
-- Email: muhammadzain0476@gmail.com
+- Email: muhammadzain.dev2@gmail.com
 - Portfolio: https://muhammadzain.app/
 
 Best regards,
@@ -195,7 +195,7 @@ Software Engineering Student | University of Calgary
     try {
       await transporter.sendMail({
         from: `Portfolio System <${EMAIL_USER}>`,
-        to: 'muhammadzain0476@gmail.com',
+        to: 'muhammadzain.dev2@gmail.com',
         subject: `Resume Request from ${name.trim()}`,
         text: `
 Someone requested your resume!
