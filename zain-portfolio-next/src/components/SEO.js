@@ -7,7 +7,7 @@ import Head from 'next/head';
 
 const SEO = ({
   title = "Muhammad Zain | Software Engineering Student",
-  description = "Third-year Software Engineering student at University of Calgary. Passionate about full-stack development, machine learning, and building impactful software solutions.",
+  description = "Final Year Software Engineering student at University of Calgary. Passionate about full-stack development, machine learning, and building impactful software solutions.",
   canonical = "/",
   ogImage = "/images/profile/zain.webp",
   ogType = "website",

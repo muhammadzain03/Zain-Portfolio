@@ -41,7 +41,7 @@ export default function About() {
     <>
       <SEO
         title="About Muhammad Zain | Software Engineering Journey & Skills"
-        description="Discover Muhammad Zain's journey from Karachi to Calgary as a Software Engineering student. Learn about his expertise in full-stack development, machine learning, database systems, and passion for building meaningful technology."
+        description="Discover Muhammad Zain's journey from Pakistan to Canada as a Software Engineering student. Learn about his expertise in full-stack development, machine learning, database systems, and passion for building meaningful technology."
         canonical="/about"
         ogType="profile"
       />
@@ -114,7 +114,7 @@ export default function About() {
               className="max-w-4xl mx-auto text-center space-y-6"
             >
               <p className="text-xs md:text-sm text-dark/90 dark:text-light/90 leading-relaxed text-center">
-                Hi, I&apos;m Muhammad Zain - a third-year Software Engineering student at the University of Calgary with a passion for building meaningful technology. My journey from Karachi to Calgary has shaped my adaptability, drive, and growth mindset. I&apos;m energized by solving real-world problems, collaborating on diverse teams, and always learning something new.
+                Hi, I&apos;m Muhammad Zain - a Final Year Software Engineering student at the University of Calgary with a passion for building meaningful technology. My journey from Pakistan to Canada has shaped my adaptability, drive, and growth mindset. I&apos;m energized by solving real-world problems, collaborating on diverse teams, and always learning something new.
               </p>
               <p className="text-xs md:text-sm text-dark/80 dark:text-light/80 leading-relaxed text-center">
                 I thrive in feedback-driven environments and value building software that is scalable, clean, and impactful. I see every challenge as an opportunity for growth - whether that&apos;s debugging a complex system, optimizing a database query, or learning a new stack. My experience spans academic projects, freelance work, and continuous self-driven learning.

@@ -82,7 +82,7 @@ export default function Document() {
               "@type": "Person",
               "name": "Muhammad Zain",
               "jobTitle": "Software Engineering Student",
-              "description": "Third-year Software Engineering student at University of Calgary specializing in full-stack development, machine learning, and database systems.",
+              "description": "Final Year Software Engineering student at University of Calgary specializing in full-stack development, machine learning, and database systems.",
               "url": "https://muhammadzain.dev",
               "image": "/images/profile/zain.webp",
               "sameAs": [

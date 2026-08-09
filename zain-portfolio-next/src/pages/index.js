@@ -25,7 +25,7 @@ export default function Home() {
     <>
       <SEO
         title="Muhammad Zain | Software Engineering Student & Developer"
-        description="Third-year Software Engineering student at University of Calgary. Passionate about full-stack development, machine learning, and building impactful software solutions. Explore my projects and journey."
+        description="Final Year Software Engineering student at University of Calgary. Passionate about full-stack development, machine learning, and building impactful software solutions. Explore my projects and journey."
         canonical="/"
         ogType="website"
       />
@@ -175,7 +175,7 @@ export default function Home() {
                   transition={{ delay: 1 }}
                   className="text-xs md:text-sm text-dark/75 dark:text-light/75 text-justify"
                 >
-                  Whether it&apos;s a real-time subway display system, a machine learning–powered airline manager, or a full-stack e-commerce platform, I strive to build software that is both functional and meaningful.
+                  Whether it&apos;s a real-time subway display system, a machine learning-powered airline manager, or a full-stack e-commerce platform, I strive to build software that is both functional and meaningful.
                 </motion.p>
 
                 {/* Personal Introduction */}

@@ -1,9 +1,9 @@
 <!--
-Muhammad Zain – Software Engineering Portfolio
+Muhammad Zain - Software Engineering Portfolio
 -->
 
 <a name="muhammad-zain-portfolio"></a>
-<h1 align="center">🌐 Muhammad Zain – Software Engineering Portfolio</h1>
+<h1 align="center">🌐 Muhammad Zain - Software Engineering Portfolio</h1>
 
 <div align="center">
 
